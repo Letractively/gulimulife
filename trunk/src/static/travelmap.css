@@ -1,0 +1,226 @@
+#wrapper{
+  width:1000px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/*header*/
+#header{
+  
+}
+
+#navibar{
+  height: 20px;
+  width:1000px;
+  font-size:medium;
+}
+
+#nb_status{
+  height: 20px;
+   color:red;
+   float:left;
+   width:100px;
+   margin-right:8px;
+}
+
+#nb_username{
+  height: 20px;
+  color:black;
+  float:left;
+  width:100px;
+  margin-right:8px;
+}
+
+#nb_trip_name{
+  height: 20px;
+  color:black;
+  float:left;
+  width:100px;
+  font-weight: bold;
+  font-size:x-small;
+  text-align:right;
+  margin-right:8px;
+}
+
+#nb_trip_lat{
+  height: 20px;
+  color:black;
+  float:left;
+  width:100px;
+  border-right:dashed 1px;
+  border-left:dashed 1px;
+  text-align:right;
+  font-size:xx-small;
+  margin-right:8px;
+}
+
+#nb_trip_lon{
+  height: 20px;
+  color:black;
+  width:100px;
+  float:left;
+  border-right:dashed 1px;
+  font-size:xx-small;
+  margin-right:8px;
+}
+
+#nb_trip_author{
+  height: 20px;
+  color:black;
+  width:200px;
+  float:left;
+  font-size:xx-small;
+  margin-right:8px;
+}
+
+#nb_trip_selector{
+  height: 20px;
+  color:black;
+  float:left;
+  width:100px;
+  margin-right:8px;
+}
+
+#add_trip {
+  height: 20px;
+  margin-right:8px;
+}
+/*content*/
+#content{
+  
+}
+
+/*map of content*/
+#map{
+  height:480px;
+  float:left;
+}
+
+#map_canvas{
+  float:left;
+  width:600px;
+  height:480px;
+}
+
+#map_panel{
+  float:left;
+  width:400px;
+  height:480px;
+}
+
+#map_panel_place{
+  width:400px;
+  height:400px;
+}
+
+#map_panel_button{
+  width:400px;
+  height:80px;
+}
+
+#map_panel_marker{
+  width:400px;
+  height:10px;
+}
+
+/*marker table*/
+#marker_table_wrapper{
+  width:400px;
+  height:300px;
+  overflow:auto;
+  vertical-align:top;
+  text-align:top;
+}
+
+div.info {
+  border: 1px solid #666666;
+  font: small;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.key {
+  text-align: right;
+  font-weight: bold;
+  vertical-align: top;
+  white-space: nowrap 
+}
+ 
+.value {
+  vertical-align: top;  
+}
+
+.marker_table_row {
+  font-size:small;
+}
+
+td {
+  width:50px;
+}
+
+th {
+  width:50px;
+}
+
+#marker_onclick_info {
+  display:none;
+  padding:8px 0 8px 0;
+  width:600px;
+  height:480px;
+  overflow:auto;
+}
+
+#marker_panel {
+  width:400px;
+  height:100px;
+  border:5px;
+  border:dashed;
+}
+
+#marker_status {
+  width:400px;
+  height:25px;
+}
+
+#marker_edit {
+  width:400px;
+  height:75px;
+}
+
+#merker_show_button {
+  width:400px;
+  height:75px;
+  text-align:center;
+  vertical-align:text-bottom;
+  font-size:large;
+}
+
+/*memo of content*/
+#memo{
+  float:left;
+}
+
+/*utilities*/
+#clear{
+  clear:left;
+}
+
+/*debug info*/
+#error_log {
+  font: big;
+  color: red;
+}
+
+/* Dialog*/
+#add_trip_window_map {
+  width:400px;
+  height:200px;
+}
+
+#merker_show_button_content {
+  width:400px;
+  height:75px;
+  text-align:center;
+  vertical-align:text-bottom;
+  font-size:large;
+}

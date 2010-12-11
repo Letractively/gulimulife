@@ -1,0 +1,450 @@
+<html>
+<head>
+
+<link type="text/css" rel="stylesheet" href="/static/calendar.css"/>
+<link type="text/css" rel="stylesheet" href="/static/jquery-ui-1.8.5.custom.css"/>
+
+<script type='text/javascript' src='http://www.google.com/jsapi'></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<script type="text/javascript" src="/static/jquery.json-2.2.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+<script type="text/javascript">
+/*
+ * UI Settings
+ * Gulimujyujyu
+ * Oct 24, 2010
+ */
+$( function() {
+  $('#from_datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+  $('#to_datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+  $('#calendar_id').selector;
+});
+</script>
+
+<script type="text/javascript">
+/*
+ * Functional Settings
+ * Gulimujyujyu
+ * Oct 24, 2010
+ */
+/*
+ * Globals
+ */
+var CURRENCY_CONVERSION = new Array();
+CURRENCY_CONVERSION["HKD"]=1;
+/*
+ * Initialization
+ */
+google.load('visualization', '1', {'packages':['annotatedtimeline']});
+google.load('visualization', '1', {'packages':['corechart']});
+google.load('visualization', '1', {'packages':['table']});
+getCurrency();
+//google.setOnLoadCallback(drawChart);
+
+/*
+ * Timeout Function
+ */
+setInterval("WaitForOneSec()", 10000); 
+function WaitForOneSec(){}
+/*
+ * Start
+ */
+$(document).ready(function() {
+  $('.rounded').corners('40px');
+  $('li').live('click', function (event) {
+    var el = event.target || event.srcElement;
+    if (el.tagName != 'A') {
+      $(this).find('div').slideToggle();
+    }
+  });
+});
+
+function expandAllInfoBoxes() {
+  $('#data').find('div').each(function(i, el) {
+    $(this).slideToggle();
+  });
+}
+
+function setLoadingUI(params) {
+  var loadingText = params['loading'] || null;
+  var data = params['data'] || null;
+  var canvas = params['canvas'] || null;
+  
+  if (loadingText) {
+    $('#loading').text(loadingText).show();
+  } else {
+    $('#loading').empty().fadeOut('slow');
+  }
+  if(data)  {
+    $('#data').html(data);
+    $('#loading').fadeOut('slow');
+  } else {
+    //$('#data').empty();
+  }
+  if(canvas)  {
+    $('#canvas').html(canvas);
+    $('#loading').fadeOut('slow');
+  } else {
+    //$('#canvas').empty();
+  }
+}
+
+function fetchCalendar() {
+  url = '/calendar/fetch_calendar';
+  $.ajaxSetup({ 
+        scriptCharset: "utf-8" , 
+        contentType: "application/json; charset=utf-8"
+  });
+  $.post(url, {}, function(data) {
+    for(var i = 0, entry; entry = data[i]; ++i) {
+      var idd = entry.id;
+      var result = idd.split("full");
+      var aaa = result[1].substr(1,result[1].length)
+        $('#calendar_id').
+          append($("<option></option>").
+          attr("value",aaa).
+          text(entry.title));
+    }
+  },'json');
+}
+
+function fetchData(url) {
+  //GET Currency Conversion
+  setLoadingUI({'loading': "gettin' some data..."});
+  var calID = $('#calendar_id').val();
+  var fromDate = $('#from_datepicker').val();
+  var toDate = $('#to_datepicker').val();
+  var params = {};
+  var calReg=/[A-z0-9]+%40[A-z.]+.com/g;
+  calReg.compile(calReg);
+  if( calID && calReg.test(calID)) 
+    params["calId"]=calID.toString();
+  if( fromDate)
+    params["start-min"]=fromDate;
+  if( toDate)
+    params["start-max"]=toDate;
+  
+  //alert(params["calId"]+params["start-min"]+params["start-max"]);
+  $.get(url, params, function(data) {
+    drawData(data);
+    //Display Currency Conversion
+    printCurrency();
+    html = [];    
+    html.push(data.length);
+	  for(var i = 0, entry; entry = data[i]; ++i) {
+	      html.push('<li>');
+	      html.push('<span style="margin-left:15px;margin-right:15px;">' +
+	                 entry.title + '</span>');
+		    var infoBoxHtml = [];
+        infoBoxHtml.push('<a href="' + entry.links['alternate'] +'" target="nw">Open in Google Calendar &raquo;</a><br>');
+        infoBoxHtml.push('<span class="right_margin">published:</span>' +
+                      entry.published + '<br>');
+        infoBoxHtml.push('<span class="right_margin">updated:</span>' +
+                       entry.updated + '<br>');
+        infoBoxHtml = '<div class="info_box">' + infoBoxHtml.join('') +  '</div>';
+        html.push(infoBoxHtml);
+  	    html.push('</li>');
+    }
+    
+    
+    setLoadingUI({'loading': 'Done!'});
+    //setLoadingUI({'loading': 'Done!','data': '<ul>' + html.join('') + '</ul>'});
+  }, 'json');
+}
+
+function drawData(data) {
+  var title;
+  var money;
+  var currency;
+  var description;
+  var currentReg = /\D+/g;
+  var moneyReg = /[0-9.]+/g;
+  var dateReg = /\d{4}-\d{2}-\d{2}/g;
+  //html = [];
+  
+  /*
+   * for ATC
+   */
+  var draw_data = new google.visualization.DataTable();
+  draw_data.addColumn('date', 'Date');
+  draw_data.addColumn('number', 'Cost');
+  draw_data.addColumn('string', 'Currency');
+  draw_data.addColumn('string', 'Desciption');
+  var draw_array = [];
+  var histogram = new Array();
+  var histogram_des = new Array();
+  
+  /*
+   * for PC
+   */
+  var draw_data_pie = new google.visualization.DataTable();
+  draw_data_pie.addColumn('string', 'Category');
+  draw_data_pie.addColumn('number', 'Cost');
+  var draw_array_pie = [];
+  var histogram_pie = new Array();
+  //get money, desciption, time
+  //statistics
+  for(var i=0, entry; entry = data[i]; ++i) {
+    title = entry.title.split("||");
+    
+    description = title[0];    
+    moneyReg.compile(moneyReg); 
+    currentReg.compile(currentReg); 
+    currency = currentReg.exec(title[1]);
+    currency = currency[0];
+    money = moneyReg.exec(title[1]);
+    money = parseFloat(money[0]);
+
+    //convert if not HKD
+    if(CURRENCY_CONVERSION[currency]) {
+      money = money/parseFloat(CURRENCY_CONVERSION[currency]);
+      currency = "HKD";
+    } 
+    else {
+      //CurrencyConverter(money,currency,"HKD");
+      alert("Conversion failed: Unknown Currency"+currency);
+      money = money/parseFloat(CURRENCY_CONVERSION[currency]);
+      currency = "HKD";
+    }
+      
+    time = entry.published;
+    dateReg.compile(dateReg);
+    updateDate = dateReg.exec(time);
+    if(histogram[updateDate[0]])
+      histogram[updateDate[0]] = histogram[updateDate[0]]+parseFloat(money);
+    else
+      histogram[updateDate[0]] = parseFloat(money);
+    
+    if(histogram_des[updateDate[0]])
+      histogram_des[updateDate[0]] = histogram_des[updateDate[0]]+" "+description;
+    else
+      histogram_des[updateDate[0]] = parseInt(histogram[updateDate[0]])+ ": "+ description;
+      
+    if(histogram_pie[description])
+      histogram_pie[description] = histogram_pie[description] + parseFloat(money);
+    else
+      histogram_pie[description] = parseFloat(money);
+  }
+  
+  /*
+   * Annotated Timeline Chart
+   */
+   //Start:ATC
+  for(var i in histogram) {
+    
+    tmpDate = i.split("-");
+    tmpyear = tmpDate[0];
+    tmpmonth = tmpDate[1];
+    tmpday = tmpDate[2];
+    tmpmoney = histogram[i];
+    //add data to rows
+    draw_array.push([new Date(tmpyear,tmpmonth-1,tmpday),parseFloat(histogram[i]) ,'HKD',histogram_des[i]]);
+  }
+  draw_data.addRows(draw_array);
+  var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('canvas'));
+  google.visualization.events.addListener(chart, 'select', chartSelectHandler); 
+  chart.draw(draw_data, {displayAnnotations: true});
+  function chartSelectHandler(e){
+    var selection = $('div.chartclient-annotation-sel').html();
+    var selection_date = $('div.chartclient-annotation-sel>table>tbody>tr>td>div.chartclient-annotation-date').html();
+    
+    /*
+     * Google Visualization: Table
+     */
+    var data_day = new google.visualization.DataTable();
+    data_day.addColumn('string', 'Detail');
+    data_day.addColumn('string', 'Link');
+    data_day.addColumn('string', 'Time');
+    data_array_day = [];
+    
+    var dateReg = /\d{4}-\d{2}-\d{2}/g;
+    sDate = new Date(selection_date);
+    for(var i=0, entry; entry = data[i]; ++i) {
+      time = entry.published;
+      dateReg.compile(dateReg);
+      updateDate = dateReg.exec(time);
+      uDate = new Date(updateDate[0]);
+      //difference is halfday
+      if(uDate.getTime() - sDate.getTime() < 1000*60*60*12 &&
+         uDate.getTime() - sDate.getTime() > -1000*60*60*12) {
+        data_array_day.push([entry.title,"<a href="+entry.links['alternate']+">See In Calendar</a>",entry.published]);
+      }
+    }
+    data_day.addRows(data_array_day);
+    var chart_day = new google.visualization.Table(document.getElementById('dayDetail'));
+    chart_day.draw(data_day, {showRowNumber: true, allowHtml: true, sort: 'enable'});
+  };
+   //End:ATC
+   
+  /*
+   * Pie Chart
+   */
+   //Start:PC
+  //draw_data_pie.addRows(histogram_pie.length);
+  var counter = 0;
+  var sum = 0;
+  for(var i in histogram_pie) {
+    //add data to rows
+    draw_array_pie.push([i,histogram_pie[i]]);
+    sum = sum + histogram_pie[i];
+    //draw_data_pie.setValue(counter,0,i);
+    //draw_data_pie.setValue(counter,1,histogram_pie[i]);
+    counter = counter+1;
+  }
+  draw_data_pie.addRows(draw_array_pie);
+  // Create and draw the visualization.
+  var chart_pie = new google.visualization.PieChart(document.getElementById('canvas_pie'));
+  chart_pie.draw(draw_data_pie, {title:"Cost by Catagories. Total: HKD "+sum});
+  google.visualization.events.addListener(chart_pie, 'select', pieDetailSelectHandler);
+  function pieDetailSelectHandler(e) {
+    var selection = chart_pie.getSelection();
+    var item = selection[0];
+    var name = draw_data_pie.getValue(item.row,item.column-1);
+    var value = draw_data_pie.getValue(item.row,item.column);
+    
+    /*
+     * Google Visualization: Table
+     */
+    var data_day = new google.visualization.DataTable();
+    data_day.addColumn('string', 'Detail');
+    data_day.addColumn('string', 'Link');
+    data_day.addColumn('string', 'Time');
+    data_array_day = [];
+    
+    for(var i=0, entry; entry = data[i]; ++i) {
+      title = entry.title.split("||");
+      description = title[0];    
+      //if is the same categories
+      if(description == name) {
+        data_array_day.push([entry.title,"<a href="+entry.links['alternate']+">See In Calendar</a>",entry.published]);
+      }
+    }
+    data_day.addRows(data_array_day);
+    var chart_day = new google.visualization.Table(document.getElementById('dayDetail'));
+    chart_day.draw(data_day, {showRowNumber: true, allowHtml: true, sort: 'enable'});
+  }
+   //End:PC
+}
+
+function getCurrency()
+{
+  var curr = ["USD","GBP","RMB","JPY","NZD","TWD","SGD","EUR"];
+  for(var iii in curr) {
+    CurrencyConverter(100, curr[iii], "HKD");
+    $('#debug').html(CURRENCY_CONVERSION[curr[iii]]);
+  }
+}
+
+function printCurrency()
+{
+  /*
+     * Google Visualization: Table
+     */
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'From');
+  data.addColumn('number', 'Amount');
+  data.addColumn('string', 'To');
+  data_array = [];
+  
+  for( var iii in CURRENCY_CONVERSION) {
+    data_array.push([iii,100 / CURRENCY_CONVERSION[iii],"HKD"]);
+  }
+  data.addRows(data_array);
+  // Create and draw the visualization.
+  var currency_table = new google.visualization.Table(document.getElementById('currencyInfo'));
+  currency_table.draw(data, {showRowNumber: true, allowHtml: true});
+}
+
+function CurrencyConverter(amount,fromCur,toCur) {
+  var feedUrl = {{converter_url}};
+  var moneyReg = /[0-9.]+/g;
+  $.post( feedUrl, {'amount':amount,'fromCur':fromCur,'toCur':toCur}, 
+    function(data){
+      //{lhs: “1 Euro”,rhs: “1.2692 U.S. dollars”,error: “”,icc: true}
+      dataArray = data.split(",");
+      fromResult = dataArray[0];
+      toResult = dataArray[1];
+      aaa = toResult.split(" ");
+      toResult = aaa.join("");
+      moneyReg.compile(moneyReg);
+      fromAmount = moneyReg.exec(fromResult);
+      fromAmount = fromAmount.join("");
+      fromCurUnit = fromCur;
+      moneyReg.compile(moneyReg);
+      toAmount = moneyReg.exec(toResult);
+      toAmount = toAmount.join("");
+      toCurUnit = toCur; 
+      CURRENCY_CONVERSION[fromCur]=parseFloat(fromAmount)/parseFloat(toAmount);
+    }, 'html');
+}
+
+</script>
+</head>
+<body>
+
+<div id="header">
+
+<div id="navibar">
+{% if user %}
+  <span style="color:red;margin-right:8px;">logged in:</span>
+  <span style="color:black;margin-right:8px;"> {{ user }}</span>
+{% endif %}
+
+{% if revoke_token_link %}
+  <span style="color:red;margin-right:8px;"> <a href="/calendar/revoke_token">revoke oauth token</a></span>
+{% endif %}
+</div>
+
+</div>
+
+{% if revoke_token_link %}
+<div id="content">
+  <div id="canvas_all">
+	  <div id="canvas" style='width: 60%; height: 360px;'></div>
+	  <div id="canvas_pie" style='width: 40%; height: 360px;'></div>
+	</div>
+	<div id="info_all">
+	  <div id="currencyInfo" style=' width: 400px; height: 240px;'></div>
+	  <div id="dayDetail" style=' width: 800px; height: 240px;'></div>
+	</div>
+	<!--
+	<div id="dataForm" style='hidden:true'>
+		<div id="loading"></div>
+		<a href="#" onclick="expandAllInfoBoxes();">toggle all</a>
+		<div id="data">dynamically filled</div>
+		<div id="tempresult"></div> 
+	</div>
+	-->
+	<div id="menu">
+	  <input type="button" value="Get Calendars" class="rounded button" onclick="fetchCalendar();">
+	  CalID:<select type="text" id="calendar_id"></select>
+	  From:<input type="text" id="from_datepicker">
+	  To:<input type="text" id="to_datepicker">
+		<input type="button" value="{{ form_value }}" class="rounded button" onclick="fetchData('{{ form_action }}');">
+	</div>
+	<div id="debug"></div>
+</div>
+
+{% else %}
+<table id="fill"><tr><td>
+<form action="{{ form_action }}" method="post">
+  <input type="submit" value="{{ form_value }}" class="rounded button"><br><br>
+  Use my Google Apps domain: &nbsp; <input type="text" name="domain" value="default">
+</form>
+</td></tr></table>
+{% endif %}
+
+{% if revoke_token_link %}
+<div id="oauth_stats">
+    <h4>OAuth Stats:</h4>
+    <table>
+    <tr><td width="200">oauth_signature_method:</td><td>{{ sig_method }}</td></tr>
+    <tr><td>oauth_consumer_key:</td><td>{{ consumer.key }}</td></tr>
+    <tr><td>oauth_token:</td><td>{{ oauth_token.key }}<br>( oauth_token_secret: {{ oauth_token.secret }} )</td></tr>
+    </table>
+</div>
+{% endif %}
+</body>
+</html>
+ 
+

@@ -1,0 +1,19 @@
+<html>
+	<head>
+		
+	</head>
+	<body>
+		<div id="header">
+		    <div id="logo"></div>
+			<div id="userMeta">
+				{{ user_nickname }}
+			</div>	
+		</div>
+		<div id="content">
+			<div id="eventpost">
+				{% for oneEvent in EventList %}
+				{% endfor %}
+			</div>
+		</div>
+	</body>
+</html>

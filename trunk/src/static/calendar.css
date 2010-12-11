@@ -1,0 +1,15 @@
+#content{width: 1200px; height:auto}
+
+#canvas_all{float:left; width:1200px;}
+#canvas_pie{float:right}
+#canvas{float:left}
+#currentInfo{float:left; }
+#dayDetail{float:right; }
+
+#info_all{float:left; width:1200px;height: 240px;}
+#dayDetail{float:right; }
+#currencyInfo{float:left; }
+
+#dataForm{float:left;width: 50%; height: 240px;}
+#menu{float:left;width: 100%; }
+#oauth_stats{float:left;width: 100%; height: 240px;}
