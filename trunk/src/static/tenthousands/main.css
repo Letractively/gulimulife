@@ -1,0 +1,103 @@
+#ts_hdr h1{
+    font-size: 50px;
+    font-family: 'Special Elite', arial, serif; 
+}
+
+.status_done{
+    background-color: #00FF00;
+}
+
+#cnt .ui-widget {
+    font-size: 20px;
+}
+
+#cnt .ui-button-text {
+    line-height: 20px;
+    padding: 4px;
+}
+
+.entry_hover {
+    background-color: #FECA40;
+}
+.status_todo{
+    background-color: #FF0000;
+}
+
+#ts_cnt_list .entry_button, .entry_action{
+    margin-top: 8px;
+}
+
+#ts_cnt_list .done_button{
+    padding: 8px;
+    background-color: #903;
+}
+
+#ts_cnt_list .undo_button {
+    padding: 8px;
+    background-color: #6C3;
+}
+
+#ts_cnt_list .delete_button{
+    text-align: center;
+    text-decoration: none;
+    width: 16px;
+    height: 16px;
+    font-size: 14px;
+    float: right;
+    background-color: #F6F6F6;
+}
+
+#ts_cnt_list .comment_button{
+    text-align: center;
+    text-decoration: none;
+    width: 16px;
+    height: 16px;
+    font-size: 14px;
+    float: right;
+    background-color: #F6F6F6;
+}
+
+#ts_cnt_list .entry{
+    background-color: #E6E6E6;
+    margin-bottom: 8px;
+}
+
+.entry_title, .entry_status{
+    height: 28px;
+    margin-top: 8px;
+    margin-bottom: 2px;
+    line-height: 20px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-size: 20px;
+    background-color: #F6F6F6;
+}
+
+.entry_result_label, .entry_result, .entry_duration {
+    height: 18px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    line-height: 10px;
+    padding-top: 2px;
+    font-size: 10px;
+    text-align: left;
+    font-family: verdana;
+}
+
+.validateTips{
+    font-size: 10px;
+    color: red;
+}
+
+.selectable {
+    margin-top: 8px;
+}
+/*
+.entry_result:hover {
+    background-color: #3333FE;
+}
+
+.entry_title:hover {
+    background-color: #3333FE;
+}
+*/

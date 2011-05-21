@@ -31,6 +31,13 @@ handlers:
 - url: /test.*
   script: gulimu_playground.py
   login: required
+  
+- url: /skillchart
+  script: gulimu_skillchart/skillchart.py
+  
+- url: /tenthousand.*
+  script: gulimu_tenthousand/tenthousand.py
+  login: required
 
 - url: /index\.html
   script: gulimulife.py

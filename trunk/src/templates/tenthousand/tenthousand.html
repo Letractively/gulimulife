@@ -1,0 +1,382 @@
+<html>
+<head>
+
+<link type="text/css" href="/static/css/ui-lightness/jquery-ui-1.8.12.custom.css" rel="stylesheet" />	
+<script type="text/javascript" src="/static/js/jquery-1.5.1.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery-ui-1.8.12.custom.min.js"></script>
+
+<link rel="stylesheet" type="text/css" media="all" href="/static/css/960/text.css"> 
+<link rel="stylesheet" type="text/css" media="all" href="/static/css/960/960.css"> 
+<link rel="stylesheet" type="text/css" media="all" href="/static/css/960/reset.css">
+
+<link rel="stylesheet" type="text/css" media="all" href="/static/tenthousands/main.css">
+<link href='http://fonts.googleapis.com/css?family=Special+Elite' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="/static/tenthousands/jquery.inlineedit.js"></script>
+    
+<script type="text/javascript" src="/static/jquery.json-2.2.min.js"></script>
+<script>
+    $(function(){
+        
+        //init all ui
+        $("#dia1").dialog("destroy");
+        $( "#create_entry_form" ).dialog( "destroy" );
+        
+        //create entries dialog
+        var content = $( "#form_content" ),
+            category = $( "#form_category"),
+            allFields = $( [] ).add( content ),
+            tips = $( ".validateTips" );
+        
+        function checkLength( o, n, min, max ) {
+            if ( o.val().length > max || o.val().length < min ) {
+                o.addClass( "ui-state-error" );
+                updateTips( "Length of " + n + " must be between " +
+                    min + " and " + max + "." );
+                return false;
+            } else {
+                return true;
+            }
+        }
+        
+        function assembleOneItem( entry) {
+            var st = new Date(entry.create_time);
+            var ft = new Date(entry.finish_time);
+            var done = false;
+            if( ft.getTime() > st.getTime()) {
+                done = true;
+            }
+            
+            var Str_Done_Status = "status_done";
+            var Str_Todo_Status = "status_todo";
+            var Str_Done_Button = "<div class='undo_button'>Undo..</div>";
+            var Str_Todo_Button = "<div class='done_button'>Done!</div>";
+            
+            var cnt_st = "<li class='grid_12 entry' id='" + entry.entry_key + "'>" + 
+                            assembleOneItemHtml(entry) +
+                         "</li>";
+            return cnt_st;
+        }
+        
+        function assembleOneItemHtml(entry) {
+            var st = new Date(entry.create_time);
+            var ft = new Date(entry.finish_time);
+            var done = false;
+            if( ft.getTime() > st.getTime()) {
+                done = true;
+            }
+            var diff = ft.getTime() - st.getTime();
+            diff /= 1000*3600*24;
+            diff = Math.ceil(diff);
+            
+            var Str_Done_Status = "status_done";
+            var Str_Todo_Status = "status_todo";
+            var Str_Done_Button = "<div class='undo_button'>Done!!</div>";
+            var Str_Todo_Button = "<div class='done_button'>Todo..</div>";
+            
+            var cnt_st = "<div class='grid_1 entry_action'>" + (done?Str_Done_Button:Str_Todo_Button) + "</div>" +
+                            //"<div class='grid_1 " + (done?Str_Done_Status:Str_Todo_Status) + "'>" + (done?"done":"todo") + "</div>" +
+                            "<div class='grid_9 alpha entry_title'>" + entry.content + "</div>" +
+                            "<div class='grid_1 alpha entry_category'>" +
+                                "<select class='selectable'>" +
+                                    "<option value=1 " + (parseInt(entry.category) == 1?"selected='selected'":"")+">Career</option>" +
+                                    "<option value=2 " + (parseInt(entry.category) == 2?"selected='selected'":"")+">People</option>" +
+                                    "<option value=3 " + (parseInt(entry.category) == 3?"selected='selected'":"")+">Fun</option>" +
+                                    "<option value=4 " + (parseInt(entry.category) == 4?"selected='selected'":"")+">Web</option>" +
+                                "</select>" +
+                                "<div id='select-result'></div>" + 
+                            "</div>" +
+                            "<div class='grid_1 omega entry_button'><a href='#' class='delete_button'>x</a></div>" +
+                            "<div class='clear'></div>" +
+                            //"<div class='grid_6 alpha'>" + entry.create_time + " " + st.getTime() + "</div>" +
+                            //"<div class='grid_6 omega'>" + entry.finish_time + " " + ft.getTime() + "</div>" +
+                            //"<div class='clear'></div>" +
+                            "<div class='prefix_1 grid_1 alpha entry_result_label'>Comment:</div>" + 
+                            "<div class='grid_8 omega entry_result'>" + (entry.result=="null"?"":entry.result) + "</div>" +
+                            "<div class='grid_2 omega entry_duration'>" + (done?("Take me "+diff+" day" + (diff>1? "s.":".")):"In progress" )+ "</div>";
+            return cnt_st;
+        }
+    
+        function checkRegexp( o, regexp, n ) {
+            if ( !( regexp.test( o.val() ) ) ) {
+                o.addClass( "ui-state-error" );
+                updateTips( n );
+                return false;
+            } else {
+                return true;
+            }
+        }
+        
+        function updateInlineEdits() {
+            $(".done_button").hover(
+                function(){
+                    var result = $(this).empty();
+                    result.append("Done!!");
+                    $(this).addClass("undo_button");
+                    $(this).removeClass("done_button");
+                },
+                function(){
+                    var result = $(this).empty();
+                    result.append("Todo..");
+                    $(this).addClass("done_button");
+                    $(this).removeClass("undo_button");
+                }
+            );
+            $(".undo_button").hover(
+                function(){
+                    var result = $(this).empty();
+                    result.append("Undo..");
+                    $(this).addClass("done_button");
+                    $(this).removeClass("undo_button");
+                },
+                function(){
+                    var result = $(this).empty();
+                    result.append("Done!!");
+                    $(this).addClass("undo_button");
+                    $(this).removeClass("done_button");
+                }
+            );
+            $(".entry_title").inlineEdit();
+            $(".entry_result").inlineEdit();
+        }
+        
+        function updateCategory() {
+            $( "#selectable" )
+                .selectable();
+        }
+        
+        function updateButtonCallbacks() {
+            $( ".undo_button" )
+                //.button()
+                .click(function() {
+                    var parent = $(this).parent();
+                    var grandparent = parent.parent();
+                    /*
+                     entry_key = self.request.get('entry');
+                    entry_result = self.request.get('result');
+                    entry_finish = self.request.get('finish');
+                    entry_content = self.request.get('content');
+                    entry_category = self.request.get('category');
+                    */
+                    entry_key = grandparent.attr("id");
+                    entry_result = grandparent.find(".entry_result").html();
+                    entry_finish = 0;
+                    entry_content = grandparent.find(".entry_title").html();
+                    var select_ele = grandparent.find(".selectable");
+                    entry_category = select_ele.val();
+                    $.post('tenthousand/post_one_entry', {entry:entry_key, result:entry_result, finish:entry_finish, content: entry_content,
+                           category:entry_category}, function(json){
+                        var st = json[0].state;
+                        if(st == "200") {
+                            var str = grandparent.html();
+                            var cnt_str = "";
+                            for( entry in json[1].data) {
+                                cnt_str = cnt_str + assembleOneItemHtml(json[1].data[entry]);
+                            }
+                            grandparent.html(cnt_str);
+                            updateButtonCallbacks();
+                            updateInlineEdits();
+                            updateCategory();
+                        }
+                        else {
+                            $("#dia1").html("<p>Post failed!</p>");
+                        }
+                        $( "#create_entry_form").dialog( "close");
+                    }, "json");
+                });
+            $( ".done_button" )
+                //.button()
+                .click(function() {
+                    var parent = $(this).parent();
+                    var grandparent = parent.parent();
+                    /*
+                     entry_key = self.request.get('entry');
+                    entry_result = self.request.get('result');
+                    entry_finish = self.request.get('finish');
+                    entry_content = self.request.get('content');
+                    entry_category = self.request.get('category');
+                    */
+                    entry_key = grandparent.attr("id");
+                    entry_result = grandparent.find(".entry_result").html();
+                    entry_finish = 1;
+                    entry_content = grandparent.find(".entry_title").html();
+                    var select_ele = grandparent.find(".selectable");
+                    entry_category = select_ele.val();
+                    $.post('tenthousand/post_one_entry', {entry:entry_key, result:entry_result, finish:entry_finish, content: entry_content,
+                           category:entry_category}, function(json){
+                        var st = json[0].state;
+                        if(st == "200") {
+                            var str = grandparent.html();
+                            var cnt_str = "";
+                            for( entry in json[1].data) {
+                                cnt_str = cnt_str + assembleOneItemHtml(json[1].data[entry]);
+                            }
+                            grandparent.html(cnt_str);
+                            updateButtonCallbacks();
+                            updateInlineEdits();
+                            updateCategory();
+                        }
+                        else {
+                            $("#dia1").html("<p>Post failed!</p>");
+                        }
+                        $( "#create_entry_form").dialog( "close");
+                    }, "json");
+                });
+            $( ".delete_button" )
+                //.button()
+                .click(function() {
+                    var parent = $(this).parent();
+                    var grandparent = parent.parent();
+                    /*
+                     entry_key = self.request.get('entry');
+                    entry_result = self.request.get('result');
+                    entry_finish = self.request.get('finish');
+                    entry_content = self.request.get('content');
+                    entry_category = self.request.get('category');
+                    */
+                    entry_key = grandparent.attr("id");
+                    entry_result = grandparent.find(".entry_result").html();
+                    entry_finish = 0;
+                    entry_content = grandparent.find(".entry_title").html();
+                    var select_ele = grandparent.find(".selectable");
+                    entry_category = select_ele.val();
+                    $.post('tenthousand/delete_one_entry', {entry:entry_key, result:entry_result, finish:entry_finish, content: entry_content,
+                           category:entry_category}, function(json){
+                        var st = json[0].state;
+                        if(st == "200") {
+                            grandparent.remove();
+                            updateButtonCallbacks();
+                            updateInlineEdits();
+                            updateCategory();
+                        }
+                        else {
+                            $("#dia1").html("<p>Delete failed!</p>");
+                        }
+                        $( "#create_entry_form").dialog( "close");
+                    }, "json");
+                });
+        }
+        
+        function updateTips( t ) {
+            tips
+                .text( t )
+                .addClass( "ui-state-highlight" );
+            setTimeout(function() {
+                tips.removeClass( "ui-state-highlight", 1500 );
+            }, 500 );
+        }
+        
+        $( "#dia1" ).dialog({
+            autoOpen: false,
+            height: 300,
+            width: 350,
+        });
+        
+        $( "#create_entry_form" ).dialog({
+            autoOpen: false,
+            height: 300,
+            width: 350,
+            modal: true,
+            buttons: {
+                "Create an account": function() {
+                    
+                    var bValid = true;
+                    allFields.removeClass( "ui-state-error" );
+
+                    bValid = bValid && checkLength( content, "content", 3, 80);
+
+                    bValid = bValid && checkRegexp( content, /^(\S)+$/i, "Content must be at least 5 characters." );
+                    
+                    if ( bValid ) {
+                        $.get('tenthousand/add_one_entry', {content:content.val(), category: category.val()}, function(json){
+                            var st = json[0].state;
+                            if(st == "200") {
+                                var cnt_str = "";
+                                for( entry in json[1].data) {
+                                    cnt_str = cnt_str + assembleOneItem(json[1].data[entry]);
+                                }
+                                $("#ts_cnt_list").append(cnt_str);
+                                updateButtonCallbacks();
+                                updateInlineEdits();
+                                updateCategory();
+                            }
+                            else {
+                                $("#dia1").html("<p>Insert failed!</p>");
+                            }
+                            $( "#create_entry_form").dialog( "close");
+                        }, "json");
+                    }
+                    
+                },
+                Cancel: function() {
+                    $( this).dialog( "close" );
+                }
+            },
+            close: function() {
+                allFields.val( "" ).removeClass( "ui-state-error" );
+            }
+        });
+        
+        //create entries dialog button
+        $( "#create_entry" )
+            .button()
+            .click(function() {
+                $( "#create_entry_form" ).dialog( "open" );
+            });
+        
+        //get all data
+        $.get('tenthousand/fetch_all_entries', function(json){
+            var stt = json[0].state;
+            var cnt_str = "";
+            for( entry in json[1].data) {
+                cnt_str = cnt_str + assembleOneItem( json[1].data[entry]) ;
+            }
+            $("#ts_cnt_list").html(cnt_str);
+            updateButtonCallbacks();
+            updateInlineEdits();
+            updateCategory();
+        }, "json");
+    });
+</script>
+</head>
+
+<body>
+    <div id="hdr" class="container_12">
+        <div id="ts_hdr" class="grid_12"><h1>Hello {{user}}!</h1></div>
+        <div class="clear"></div>
+    </div>
+    <div id="cnt" class="container_12">
+        <div id="ts_cnt" class="grid_12">
+            <ul id="ts_cnt_list">
+                
+            </ul>
+        </div>
+        <div class="clear"></div>
+        <div id="ts_add" class="grid_12">
+            <div id="create_entry_form" title="Create new entry">
+                <p class="validateTips">All form fields are required.</p>
+                <form>
+                <fieldset>
+                    <label for="form_content">Content</label>
+                    <input type="text" name="form_content" id="form_content" class="text ui-widget-content ui-corner-all" />
+                    <label for="form_category">Category</label>
+                    <select id="form_category" name="form_category" class='selectable'> +
+                        "<option value=1>Career</option>" +
+                        "<option value=2>People</option>" +
+                        "<option value=3>Fun</option>" +
+                        "<option value=4>Web</option>" +
+                    </select>
+                </fieldset>
+                </form>
+            </div>
+            <button id="create_entry">Create Entry</button>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="ftr" class="container_12">
+        <div id="ts_ftr" class="grid_12"><a href="..">Back</a></div>
+        <div class="clear"></div>
+    </div>
+    <div id="dia1"><p>Insert failed!</p></div>
+</body>
+
+</html>
