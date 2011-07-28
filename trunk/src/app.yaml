@@ -7,32 +7,15 @@ handlers:
 - url: /static
   static_dir: static
   
-- url: /step1.*
-  script: step1.py
-  
-- url: /step2.*
-  script: step2.py
-  
-- url: /step3.*
-  script: step3.py
-  
-- url: /user.*
-  script: gulimulife.py
-  login: required
-  
 - url: /calendar.*
-  script: gulimu_calendar_oauth.py
+  script: gulimu_calendar/calendar_oauth.py
   login: required
   
 - url: /travelmap.*
-  script: gulimu_travelmap.py
+  script: gulimu_travelmap/travelmap.py
   login: required
   
-- url: /test.*
-  script: gulimu_playground.py
-  login: required
-  
-- url: /skillchart
+- url: /skillchart.*
   script: gulimu_skillchart/skillchart.py
   
 - url: /tenthousand.*

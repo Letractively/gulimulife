@@ -18,7 +18,7 @@ from google.appengine.ext.webapp import template
 
 from google.appengine.ext import db
 
-import constants
+from utils import constants
 
 #TODO: 1.geo, 2.rating, 3.time
 

@@ -8,7 +8,7 @@ from datetime import date
 from datetime import timedelta
 
 class Constants:
-    TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), 'templates');
+    TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), '../templates');
     
     CAL_MONEY_ID = '15k5jcgdnscdj9j5lposl32hms%40group.calendar.google.com';
     CAL_FEEDURL = 'https://www.google.com/calendar/feeds/'

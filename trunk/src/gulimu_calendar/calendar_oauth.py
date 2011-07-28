@@ -16,7 +16,7 @@ Created on 11 Oct 2010
 import cgi
 import re
 import os
-import gdata.auth
+import gdata
 
 import atom
 import gdata
@@ -33,7 +33,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.api import urlfetch
 
-import constants
+from utils import constants
 
 
 SETTINGS = {
