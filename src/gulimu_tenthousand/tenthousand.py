@@ -16,7 +16,7 @@ from django.utils import simplejson
 from google.appengine.ext import db
 from datetime import datetime
 
-import constants
+from utils import constants
 
 #define entries
 class Entry(db.Model):

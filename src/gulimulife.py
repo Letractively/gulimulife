@@ -3,11 +3,8 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.api import users
 from google.appengine.ext.webapp import template
 
-import constants
+from utils import constants
 import os
-import gulimu_user
-import gulimu_calendar_oauth
-import gulimu_playground
 
 class MainPage(webapp.RequestHandler):
     

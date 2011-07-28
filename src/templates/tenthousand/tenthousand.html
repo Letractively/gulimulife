@@ -284,7 +284,7 @@
 
                     bValid = bValid && checkLength( content, "content", 3, 80);
 
-                    bValid = bValid && checkRegexp( content, /^(\S)+$/i, "Content must be at least 5 characters." );
+                    //bValid = bValid && checkRegexp( content, /^(\S)+$/i, "Content must be at least 5 characters." );
                     
                     if ( bValid ) {
                         $.get('tenthousand/add_one_entry', {content:content.val(), category: category.val()}, function(json){

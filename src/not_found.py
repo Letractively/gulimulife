@@ -8,8 +8,8 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.api import users
 from google.appengine.ext.webapp import template
 
-import constants
 import os
+from utils import constants
 
 class MainPage(webapp.RequestHandler):
     
