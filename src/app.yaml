@@ -10,7 +10,11 @@ handlers:
 - url: /calendar.*
   script: gulimu_calendar/calendar_oauth.py
   login: required
-  
+
+- url: /everyday.*
+  script: gulimu_everyday/everyday.py
+  login: required
+
 - url: /travelmap.*
   script: gulimu_travelmap/travelmap.py
   login: required
