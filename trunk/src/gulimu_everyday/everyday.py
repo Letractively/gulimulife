@@ -7,6 +7,7 @@ Created on 2011-09-01
 # -*- coding:utf-8 -*-
 
 import os
+import logging
 
 from google.appengine.api import users
 from google.appengine.ext.webapp.util import run_wsgi_app
@@ -30,6 +31,7 @@ class MainPage(webapp.RequestHandler):
             'user': users.get_current_user(),
         }
 
+        #logging.info( constants.Constants.TEMPLATE_PATH)
         path = os.path.join(constants.Constants.TEMPLATE_PATH, 'everyday/everyday.html')
         self.response.out.write(template.render(path, template_values));
 

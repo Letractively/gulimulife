@@ -1,13 +1,13 @@
 <html>
 <head>
 
-<link type="text/css" rel="stylesheet" href="/static/calendar.css"/>
-<link type="text/css" rel="stylesheet" href="/static/jquery-ui-1.8.5.custom.css"/>
+<link type="text/css" rel="stylesheet" href="/static/calendar/css/calendar.css"/>
+<link type="text/css" href="/static/css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/static/js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery-ui-1.8.16.custom.min.js"></script>
 
 <script type='text/javascript' src='http://www.google.com/jsapi'></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-<script type="text/javascript" src="/static/jquery.json-2.2.min.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.json-2.2.min.js"></script>
 <script type="text/javascript">
 /*
  * UI Settings
@@ -50,7 +50,6 @@ function WaitForOneSec(){}
  * Start
  */
 $(document).ready(function() {
-  $('.rounded').corners('40px');
   $('li').live('click', function (event) {
     var el = event.target || event.srcElement;
     if (el.tagName != 'A') {
@@ -157,8 +156,7 @@ function drawData(data) {
   var money;
   var currency;
   var description;
-  var currentReg = /\D+/g;
-  var moneyReg = /[0-9.]+/g;
+  var moneyReg = /(\D+)([0-9.]+)/g;
   var dateReg = /\d{4}-\d{2}-\d{2}/g;
   //html = [];
   
@@ -188,12 +186,10 @@ function drawData(data) {
     title = entry.title.split("||");
     
     description = title[0];    
-    moneyReg.compile(moneyReg); 
-    currentReg.compile(currentReg); 
-    currency = currentReg.exec(title[1]);
-    currency = currency[0];
-    money = moneyReg.exec(title[1]);
-    money = parseFloat(money[0]);
+    moneyReg.compile(moneyReg);
+    var tmpMoney = moneyReg.exec(title[1]);
+    currency = tmpMoney[1];
+    money = parseFloat(tmpMoney[2]);
 
     //convert if not HKD
     if(CURRENCY_CONVERSION[currency]) {
@@ -207,7 +203,7 @@ function drawData(data) {
       currency = "HKD";
     }
       
-    time = entry.published;
+    time = entry.startTime === ''? entry.published: entry.startTime;
     dateReg.compile(dateReg);
     updateDate = dateReg.exec(time);
     if(histogram[updateDate[0]])
@@ -260,7 +256,7 @@ function drawData(data) {
     var dateReg = /\d{4}-\d{2}-\d{2}/g;
     sDate = new Date(selection_date);
     for(var i=0, entry; entry = data[i]; ++i) {
-      time = entry.published;
+      time = entry.startTime === ''? entry.published: entry.startTime;
       dateReg.compile(dateReg);
       updateDate = dateReg.exec(time);
       uDate = new Date(updateDate[0]);
@@ -298,24 +294,21 @@ function drawData(data) {
   google.visualization.events.addListener(chart_pie, 'select', pieDetailSelectHandler);
   function pieDetailSelectHandler(e) {
     var selection = chart_pie.getSelection();
+
     var item = selection[0];
-    var name = draw_data_pie.getValue(item.row,item.column-1);
-    var value = draw_data_pie.getValue(item.row,item.column);
-    
-    /*
-     * Google Visualization: Table
-     */
+    var name = draw_data_pie.getValue(item.row,0);
+
     var data_day = new google.visualization.DataTable();
     data_day.addColumn('string', 'Detail');
     data_day.addColumn('string', 'Link');
     data_day.addColumn('string', 'Time');
     data_array_day = [];
-    
+
     for(var i=0, entry; entry = data[i]; ++i) {
       title = entry.title.split("||");
-      description = title[0];    
+      description = title[0];
       //if is the same categories
-      if(description == name) {
+      if(description.toLowerCase() == name.toLowerCase()) {
         data_array_day.push([entry.title,"<a href="+entry.links['alternate']+">See In Calendar</a>",entry.published]);
       }
     }
