@@ -17,6 +17,7 @@ import cgi
 import re
 import os
 import gdata
+import logging
 
 import atom
 import gdata
@@ -180,16 +181,26 @@ class FetchData(OAuthDance):
             json = [];
             
             response = gcal.Get(feed_url)
+            #logging.warning("INFO:\t\t\tEntry:" + str(response))
             # for xml
             #response = gcal.Get(feed_url, converter=str)            
             #self.response.out.write(response)
             if isinstance(response, atom.Feed):
-                reg = re.compile(r"^[A-z0-9.]+[\|]{2}[A-Z]{3}[\d]+$")
+                reg = re.compile(r"^[A-z0-9.]+[\|]{2}[A-Z]{3}[\d.]+$")
                 for entry in response.entry:
+                    tmpWhen = None
+                    for lala in entry.extension_elements:
+                        if lala.tag == 'when':
+                            tmpWhen = lala.attributes
+                    if tmpWhen is None:
+                        startTime = ''
+                    else:
+                        startTime = tmpWhen.get('startTime')
                     if reg.match(entry.title.text):
                         json.append({'title': entry.title.text,
                                      'links': {'alternate': entry.GetHtmlLink().href},
                                      'published': entry.published.text,
+                                     'startTime': startTime,
                                      'updated': entry.updated.text,
                                      })
             #    json = [{"state":"Feed Format"}];
