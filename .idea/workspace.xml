@@ -47,19 +47,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="everyday.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="everyday.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gulimu_everyday/everyday.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="38" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="svn.ignore" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/svn.ignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="6" selection-start="19" selection-end="19" vertical-scroll-proportion="0.026086956">
+            <state line="43" column="38" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.8608696">
               <folding />
             </state>
           </provider>
@@ -512,44 +503,6 @@
         <state line="335" column="4" selection-start="10021" selection-end="10021" vertical-scroll-proportion="5.2365217" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gdata/oauth/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gdata/calendar/data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="840" selection-end="840" vertical-scroll-proportion="0.72432435">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gdata/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gdata/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="370" column="29" selection-start="11134" selection-end="11134" vertical-scroll-proportion="0.026086956">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gdata/oauth/CHANGES.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gdata/apps_property.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.14782609">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gulimu_calendar/calendar_oauth.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="39" column="0" selection-start="863" selection-end="1397" vertical-scroll-proportion="0.0">
@@ -557,16 +510,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gulimu_everyday/everyday.py">
+    <entry file="file://$PROJECT_DIR$/svn.ignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="38" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.0">
+        <state line="1" column="6" selection-start="19" selection-end="19" vertical-scroll-proportion="0.026086956">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/svn.ignore">
+    <entry file="file://$PROJECT_DIR$/src/gulimu_everyday/everyday.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="6" selection-start="19" selection-end="19" vertical-scroll-proportion="0.026086956">
+        <state line="43" column="38" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.8608696">
           <folding />
         </state>
       </provider>
