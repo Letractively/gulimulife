@@ -90,8 +90,8 @@ class MainPage(webapp.RequestHandler):
         path = os.path.join(constants.Constants.TEMPLATE_PATH, 'calendar/calendar.html')
         self.response.out.write(template.render(path, template_values))
 
-
 class OAuthDance(webapp.RequestHandler):
+
     """Handler for the 3 legged OAuth dance, v1.0a."""
 
     """This handler is responsible for fetching an initial OAuth request token,
@@ -114,7 +114,7 @@ class OAuthDance(webapp.RequestHandler):
             oauth_verifier = self.request.get('oauth_verifier', default_value='')
             access_token = gcal.UpgradeToOAuthAccessToken(
                 oauth_verifier=oauth_verifier)
-            
+
             # Remember the access token in the current user's token store
             if access_token and users.get_current_user():
                 gcal.token_store.add_token(access_token)
@@ -129,7 +129,7 @@ class OAuthDance(webapp.RequestHandler):
         """Fetches a request token and redirects the user to the approval page."""
 
         self.session = Session()
-    
+
         if users.get_current_user():
             # 1.) REQUEST TOKEN STEP. Provide the data scope(s) and the page we'll
             # be redirected back to after the user grants access on the approval page.
@@ -165,26 +165,26 @@ class FetchData(OAuthDance):
     # POST /fetch_data
     def post(self):
         """Fetches the user's data."""
-         
+
         calendarId = self.request.get('calId', default_value=constants.Constants.CAL_MONEY_ID);
         projection = self.request.get('proj', default_value=constants.Constants.CAL_PROJECTION);
         start_min = self.request.get('start-min', default_value=constants.Constants.CAL_START)
         start_max = self.request.get('start-max', default_value=constants.Constants.CAL_END)
-        max_results = self.request.get('max-results', default_value=constants.Constants.CAL_MAX_RESULTS) 
-        
-        feed_url = constants.Constants.CAL_FEEDURL + calendarId + projection \
-            + '?start-min=' + start_min + '&start-max=' + start_max \
-            + '&max-results=' + max_results;
+        max_results = self.request.get('max-results', default_value=constants.Constants.CAL_MAX_RESULTS)
+
+        feed_url = constants.Constants.CAL_FEEDURL + calendarId + projection\
+                   + '?start-min=' + start_min + '&start-max=' + start_max\
+                   + '&max-results=' + max_results;
         #feed_url = 'https://www.google.com/calendar/feeds/default/owncalendars/full/'
         #feed_url = 'https://www.google.com/calendar/feeds/15k5jcgdnscdj9j5lposl32hms%40group.calendar.google.com/private/full'
         try:
             json = [];
-            
+
             response = gcal.Get(feed_url)
             #logging.warning("INFO:\t\t\tEntry:" + str(response))
             # for xml
-            #response = gcal.Get(feed_url, converter=str)            
-            #self.response.out.write(response)
+            #response = gcal.Get(feed_url, converter=str)
+            #self.response.out.write(response)javascript:;
             if isinstance(response, atom.Feed):
                 reg = re.compile(r"^[A-z0-9.]+[\|]{2}[A-Z]{3}[\d.]+$")
                 for entry in response.entry:
@@ -209,10 +209,10 @@ class FetchData(OAuthDance):
             #    json = [{"state":"Entry Format"}];
             else:
                 json = [{"state":"Unknown Format"}];
-            
-            #feed = gcal.GetCalendarListFeed()
-            
-            #for entry in feed.entry:
+
+                #feed = gcal.GetCalendarListFeed()
+
+                #for entry in feed.entry:
                 #json.append({'title': entry.title.text,
                 #    })
             self.response.out.write(simplejson.dumps(json))

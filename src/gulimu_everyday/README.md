@@ -10,7 +10,7 @@ Input Format
 -------
 In your calendar, you should have a data entry like this.
 
-> WhatYouDo||MOOD$$TAG1,TAG2&&
+> WhatYouDo||MOOD$$TAG1;TAG2
 
 The Syntax is yet to be decided.
 
