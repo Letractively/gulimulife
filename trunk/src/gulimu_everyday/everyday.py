@@ -8,17 +8,24 @@ Created on 2011-09-01
 
 import os
 import logging
+from urlparse import urlparse
+from urlparse import urljoin
 
 from google.appengine.api import users
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
-from google.appengine.api import oauth
+
+from appengine_utilities.sessions import Session
 
 import gdata
+import gdata.calendar
+import gdata.calendar.service
 import gdata.calendar.data
 import gdata.calendar.client
 import gdata.acl.data
+import gdata.alt
+import gdata.alt.appengine
 import atom.data
 import time
 
@@ -30,46 +37,96 @@ SETTINGS = {
   'CONSUMER_KEY': 'gulimulife.appspot.com',
   'CONSUMER_SECRET': 'P7ujwzNKRof2HmLS2L+Zj2zk',
   'SIG_METHOD': gdata.auth.OAuthSignatureMethod.HMAC_SHA1,
-  'SCOPES': 'https://www.google.com/calendar/feeds/',
+  'SCOPES': ['https://www.google.com/calendar/feeds/'],
   }
 
-gcal = gdata.calendar.service.CalendarService()
-#gcal = gdata.service.GDataService();
-gcal.SetOAuthInputParameters(SETTINGS['SIG_METHOD'], SETTINGS['CONSUMER_KEY'],
-                              consumer_secret=SETTINGS['CONSUMER_SECRET'])
-gdata.alt.appengine.run_on_appengine(gcal)
+gcal = gdata.calendar.client.CalendarClient()
+
 everyday_prefix = '/everyday'
 
 #main page
 class MainPage(webapp.RequestHandler):
     title = 'Main Page'
 
+    # GET /
     def get(self):
-        if not users.get_current_user():
-            self.redirect(users.create_login_url(self.request.uri));
 
-        try:
-            user = oauth.get_current_user();
-            oauth_key = oauth.get_oauth_consumer_key();
-            logging.info(oauth_key);
+        current_user = users.get_current_user()
+        if not current_user:
+            self.redirect(users.create_login_url(self.request.uri))
 
-        except oauth.OAuthRequestError:
-            user = users.get_current_user();
+        access_token = gdata.gauth.AeLoad('accessKey')
+        logging.info('Access Token:' + str(access_token))
+        action_list = []
+
+        if isinstance(access_token, gdata.gauth.OAuthHmacToken):
+            #feed = gcal.GetCalendarListFeed()
+            #action_list.append({'action_name':'Revoke token','action_content':everyday_prefix+'/revoke_token'})
+            form_action = everyday_prefix + '/fetch_data'
+            form_value = 'Now fetch my calendars!'
+            revoke_token_link = True
+        else:
+            action_list.append({'action_name':'Authorize','action_content':everyday_prefix+'/apply_oauth_token'})
+            form_action = everyday_prefix + '/get_oauth_token'
+            form_value = 'Give this website access to my Google Calendars'
+            revoke_token_link = None
+
+        converter_url = "\"" + everyday_prefix + '/currency_converter' + "\""
 
         template_values = {
-            'user': user,
+            'form_action': form_action,
+            'converter_url': converter_url,
+            'form_value': form_value,
+            'user': current_user,
+            'user_nickname': current_user.nickname(),
+            'action_list': action_list,
+            'revoke_token_link': revoke_token_link,
+            'access_token': access_token,
         }
 
-        #logging.info( constants.Constants.TEMPLATE_PATH)
         path = os.path.join(constants.Constants.TEMPLATE_PATH, 'everyday/everyday.html')
-        self.response.out.write(template.render(path, template_values));
+        self.response.out.write(template.render(path, template_values))
 
-    def post(self):
-        self.get();
+#OAuth authorize
+class OAuthApply(webapp.RequestHandler):
+    def get(self):
+        """Fetches a request token and redirects the user to the approval page."""
 
+        if users.get_current_user():
+            # 1.) REQUEST TOKEN STEP. Provide the data scope(s) and the page we'll
+            # be redirected back to after the user grants access on the approval page.
+
+            uri_cur = urlparse(self.request.uri)
+            #logging.info(self.request.uri)
+            #logging.info(uri_cur)
+            #logging.info(uri_cur.hostname)
+            callback_url = urljoin(self.request.uri, 'get_oauth_token')
+            #logging.info(callback_url)
+            req_token = gcal.GetOAuthToken(
+                scopes=SETTINGS['SCOPES'], next=callback_url, consumer_key=SETTINGS['CONSUMER_KEY'],
+                consumer_secret = SETTINGS['CONSUMER_SECRET'])
+
+            # When using HMAC, persist the token secret in order to re-create an
+            # OAuthToken object coming back from the approval page.
+            gdata.gauth.AeSave(req_token, 'myKey')
+
+            # Generate the URL to redirect the user to.  Add the hd paramter for a
+            # better user experience.  Leaving it off will give the user the choice
+            # of what account (Google vs. Google Apps) to login with.
+            domain = self.request.get('domain', default_value='default')
+            logging.info(domain)
+            approval_page_url = req_token.generate_authorization_url(google_apps_domain=domain)
+            logging.info('Request page 1: ' + str(approval_page_url))
+            #logging.info('Request page 2: ' + gcal.GenerateOAuthAuthorizationURL(
+            #    extra_params={'hd': domain}, callback_url=callback_url))
+
+            # 2.) APPROVAL STEP.  Redirect to user to Google's OAuth approval page.
+            logging.info(domain)
+            logging.info(approval_page_url)
+            self.redirect(str(approval_page_url))
 
 #OAuth Handler Class
-class OAuthDance(webapp.RequestHandler):
+class OAuthFinish(webapp.RequestHandler):
 
     """Handler for the 3 legged OAuth dance, v1.0a."""
 
@@ -82,52 +139,15 @@ class OAuthDance(webapp.RequestHandler):
     def get(self):
         """Invoked after we're redirected back from the approval page."""
 
-        self.session = Session()
-        oauth_token = gdata.auth.OAuthTokenFromUrl(self.request.uri)
+        saved_request_token = gdata.gauth.AeLoad('myKey')
+        oauth_token = gdata.gauth.AuthorizeRequestToken(saved_request_token, self.request.uri)
         if oauth_token:
-            oauth_token.secret = self.session['oauth_token_secret']
-            oauth_token.oauth_input_params = gcal.GetOAuthInputParameters()
-            gcal.SetOAuthToken(oauth_token)
+            access_token = gcal.GetAccessToken(oauth_token)
+            gdata.gauth.AeSave(access_token, 'accessKey')
 
-            # 3.) Exchange the authorized request token for an access token
-            oauth_verifier = self.request.get('oauth_verifier', default_value='')
-            access_token = gcal.UpgradeToOAuthAccessToken(
-                oauth_verifier=oauth_verifier)
+        self.redirect(everyday_prefix)
 
-            # Remember the access token in the current user's token store
-            if access_token and users.get_current_user():
-                gcal.token_store.add_token(access_token)
-            elif access_token:
-                gcal.current_token = access_token
-                gcal.SetOAuthToken(access_token)
-
-        self.redirect(calendar_prefix)
-
-    # POST /get_oauth_token
-    def post(self):
-        """Fetches a request token and redirects the user to the approval page."""
-
-        self.session = Session()
-
-        if users.get_current_user():
-            # 1.) REQUEST TOKEN STEP. Provide the data scope(s) and the page we'll
-            # be redirected back to after the user grants access on the approval page.
-            req_token = gcal.FetchOAuthRequestToken(
-                scopes=SETTINGS['SCOPES'], oauth_callback=self.request.uri)
-
-            # When using HMAC, persist the token secret in order to re-create an
-            # OAuthToken object coming back from the approval page.
-            self.session['oauth_token_secret'] = req_token.secret
-
-            # Generate the URL to redirect the user to.  Add the hd paramter for a
-            # better user experience.  Leaving it off will give the user the choice
-            # of what account (Google vs. Google Apps) to login with.
-            domain = self.request.get('domain', default_value='default')
-            approval_page_url = gcal.GenerateOAuthAuthorizationURL(
-                extra_params={'hd': domain})
-
-            # 2.) APPROVAL STEP.  Redirect to user to Google's OAuth approval page.
-            self.redirect(approval_page_url)
+#Fetch Calendars Feed
 
 #404 page
 class ErrorPage(webapp.RequestHandler):
@@ -142,6 +162,8 @@ class ErrorPage(webapp.RequestHandler):
 #manage links
 def main():
     application = webapp.WSGIApplication([(everyday_prefix, MainPage),
+                                          (everyday_prefix + '/apply_oauth_token', OAuthApply),
+                                          (everyday_prefix + '/get_oauth_token', OAuthFinish),
                                           (everyday_prefix + '.*', ErrorPage)],
                                          debug=True)
     run_wsgi_app(application)

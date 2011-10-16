@@ -37,6 +37,7 @@ CURRENCY_CONVERSION["HKD"]=1;
  */
 google.load('visualization', '1', {'packages':['annotatedtimeline']});
 google.load('visualization', '1', {'packages':['corechart']});
+google.load('visualization', '1', {'packages':['treemap']});
 google.load('visualization', '1', {'packages':['table']});
 getCurrency();
 //google.setOnLoadCallback(drawChart);
@@ -75,16 +76,10 @@ function setLoadingUI(params) {
     $('#loading').empty().fadeOut('slow');
   }
   if(data)  {
-    $('#data').html(data);
+    $('#loading').text(loadingText).show();
     $('#loading').fadeOut('slow');
   } else {
     //$('#data').empty();
-  }
-  if(canvas)  {
-    $('#canvas').html(canvas);
-    $('#loading').fadeOut('slow');
-  } else {
-    //$('#canvas').empty();
   }
 }
 
@@ -125,6 +120,10 @@ function fetchData(url) {
   
   //alert(params["calId"]+params["start-min"]+params["start-max"]);
   $.get(url, params, function(data) {
+    if(data.error) {
+        setLoadingUI({'loading':'There is error. Please click Get Calendar at the bottom.'})
+        return;
+    }
     drawData(data);
     //Display Currency Conversion
     printCurrency();
@@ -144,9 +143,8 @@ function fetchData(url) {
         html.push(infoBoxHtml);
   	    html.push('</li>');
     }
-    
-    
-    setLoadingUI({'loading': 'Done!'});
+      
+    setLoadingUI({'loading': 'Done!', 'data': 'yo'});
     //setLoadingUI({'loading': 'Done!','data': '<ul>' + html.join('') + '</ul>'});
   }, 'json');
 }
@@ -156,6 +154,7 @@ function drawData(data) {
   var money;
   var currency;
   var description;
+  var totalReg = /^([\w.]+)[\|]{2}([A-Z]{3})([\d.]+)([$]{2}((\w+[,;]?)+))?$/ig; //^[\w.]+[\|]{2}[A-Z]{3}[\d.]+([$]{2}(\w+[,;]?)+)?$
   var moneyReg = /(\D+)([0-9.]+)/g;
   var dateReg = /\d{4}-\d{2}-\d{2}/g;
   //html = [];
@@ -180,9 +179,86 @@ function drawData(data) {
   draw_data_pie.addColumn('number', 'Cost');
   var draw_array_pie = [];
   var histogram_pie = new Array();
+
+  /*
+   * for Treemap
+   */
+  var draw_data_tm  = new google.visualization.DataTable();
+  draw_data_tm.addColumn('string', 'Tag');
+  draw_data_tm.addColumn('string', 'Parent');
+  draw_data_tm.addColumn('number', 'Amount');
+  draw_data_tm.addColumn('number', 'Frequency');
+  var data_array_tm = [];
+  var histogram_tag = {'isEmpty':1};
+  var histogram_tag_fre = {'isEmpty':1};
+    
+  /*
+   * Start statistics
+   */
   //get money, desciption, time
   //statistics
   for(var i=0, entry; entry = data[i]; ++i) {
+    /*New Version--Start*/
+    title = entry.title;
+    totalReg.compile(totalReg);
+    var tmp_result = totalReg.exec(title)
+    console.dir(tmp_result);
+
+    description = tmp_result[1];
+    currency = tmp_result[2];
+    money = parseFloat(tmp_result[3]);
+    //convert if not HKD
+    if(CURRENCY_CONVERSION[currency]) {
+      money = money/parseFloat(CURRENCY_CONVERSION[currency]);
+      currency = "HKD";
+    }
+    else {
+      //CurrencyConverter(money,currency,"HKD");
+      alert("Conversion failed: Unknown Currency"+currency);
+      money = money/parseFloat(CURRENCY_CONVERSION[currency]);
+      currency = "HKD";
+    }
+
+    time = entry.startTime === ''? entry.published: entry.startTime;
+    dateReg.compile(dateReg);
+    updateDate = dateReg.exec(time);
+    if(histogram[updateDate[0]])
+      histogram[updateDate[0]] = histogram[updateDate[0]]+parseFloat(money);
+    else
+      histogram[updateDate[0]] = parseFloat(money);
+
+    if(histogram_des[updateDate[0]])
+      histogram_des[updateDate[0]] = histogram_des[updateDate[0]]+" "+description;
+    else
+      histogram_des[updateDate[0]] = parseInt(histogram[updateDate[0]])+ ": "+ description;
+
+    if(histogram_pie[description])
+      histogram_pie[description] = histogram_pie[description] + parseFloat(money);
+    else
+      histogram_pie[description] = parseFloat(money);
+      
+    if (tmp_result[4]) {
+        var tags = tmp_result[5].split(',');
+        console.dir(tags);
+        for( var ii=0, tagslen = tags.length; ii<tagslen; ii++) {
+            var onetag = tags[ii].toLowerCase();
+            if (histogram_tag[onetag]) {
+                histogram_tag[onetag] = histogram_tag[onetag] + parseFloat(money);
+                histogram_tag_fre[onetag] = histogram_tag_fre[onetag] + 1;
+            }
+            else {
+                histogram_tag[onetag] = 1;
+                histogram_tag.isEmpty = 0;
+                histogram_tag_fre[onetag] = 1;
+                histogram_tag_fre.isEmpty = 0;
+            }
+        }
+    }
+    console.dir(histogram_tag);
+    /*New Version--End*/
+
+    /*Old Version--Start*/
+    /*
     title = entry.title.split("||");
     
     description = title[0];    
@@ -220,6 +296,8 @@ function drawData(data) {
       histogram_pie[description] = histogram_pie[description] + parseFloat(money);
     else
       histogram_pie[description] = parseFloat(money);
+    */
+    /*Old Version--End*/
   }
   
   /*
@@ -276,15 +354,12 @@ function drawData(data) {
    * Pie Chart
    */
    //Start:PC
-  //draw_data_pie.addRows(histogram_pie.length);
   var counter = 0;
   var sum = 0;
   for(var i in histogram_pie) {
     //add data to rows
     draw_array_pie.push([i,histogram_pie[i]]);
     sum = sum + histogram_pie[i];
-    //draw_data_pie.setValue(counter,0,i);
-    //draw_data_pie.setValue(counter,1,histogram_pie[i]);
     counter = counter+1;
   }
   draw_data_pie.addRows(draw_array_pie);
@@ -295,15 +370,21 @@ function drawData(data) {
   function pieDetailSelectHandler(e) {
     var selection = chart_pie.getSelection();
 
-    var item = selection[0];
-    var name = draw_data_pie.getValue(item.row,0);
+    try {
+        var item = selection[0];
+        var name = draw_data_pie.getValue(item.row,0);
+    } catch(err) {
+        console.log(err);
+        return;
+    }
 
+    
     var data_day = new google.visualization.DataTable();
     data_day.addColumn('string', 'Detail');
     data_day.addColumn('string', 'Link');
     data_day.addColumn('string', 'Time');
     data_array_day = [];
-
+    
     for(var i=0, entry; entry = data[i]; ++i) {
       title = entry.title.split("||");
       description = title[0];
@@ -317,6 +398,54 @@ function drawData(data) {
     chart_day.draw(data_day, {showRowNumber: true, allowHtml: true, sort: 'enable'});
   }
    //End:PC
+
+  /*
+   * Tree Map
+   */
+  //start: tree map
+  data_array_tm.push(['Tag',null,0,0]);
+  if( histogram_tag.isEmpty === 0) {
+    for( var i in histogram_tag) {
+      data_array_tm.push([i,'Tag',histogram_tag[i],histogram_tag_fre[i]]);
+    }
+  } else {
+    data_array_tm.push(['This is no tags information.','Tag',1,0]);
+  }
+  draw_data_tm.addRows(data_array_tm);
+  var chart_tree = new google.visualization.TreeMap(document.getElementById('canvas_tm'));
+  chart_tree.draw(draw_data_tm, {
+    minColor: '#f00',
+    midColor: '#ddd',
+    maxColor: '#0d0',
+    headerHeight: 15,
+    fontColor: 'black',
+    showScale: true});
+  google.visualization.events.addListener(chart_tree, 'select', treeDetailSelectHandler);
+  function treeDetailSelectHandler(e) {
+    var selection = chart_tree.getSelection();
+    console.dir(selection);
+    var item = selection[0];
+    var name = draw_data_tm.getValue(item.row,0);
+    name = name.toLowerCase();
+
+    var data_day = new google.visualization.DataTable();
+    data_day.addColumn('string', 'Detail');
+    data_day.addColumn('string', 'Link');
+    data_day.addColumn('string', 'Time');
+    data_array_day = [];
+
+    for(var i=0, entry; entry = data[i]; ++i) {
+      title = entry.title.toLocaleLowerCase();
+      //if is the same categories
+      if(title.indexOf(name) != -1) {
+        data_array_day.push([entry.title,"<a href="+entry.links['alternate']+">See In Calendar</a>",entry.published]);
+      }
+    }
+    data_day.addRows(data_array_day);
+    var chart_day = new google.visualization.Table(document.getElementById('dayDetail'));
+    chart_day.draw(data_day, {showRowNumber: true, allowHtml: true, sort: 'enable'});
+  }
+  //end: tree map
 }
 
 function getCurrency()
@@ -386,6 +515,7 @@ function CurrencyConverter(amount,fromCur,toCur) {
 {% if revoke_token_link %}
   <span style="color:red;margin-right:8px;"> <a href="/calendar/revoke_token">revoke oauth token</a></span>
 {% endif %}
+  <span id="loading" style="color:blue;margin-left:8px"></span>
 </div>
 
 </div>
@@ -393,9 +523,10 @@ function CurrencyConverter(amount,fromCur,toCur) {
 {% if revoke_token_link %}
 <div id="content">
   <div id="canvas_all">
-	  <div id="canvas" style='width: 60%; height: 360px;'></div>
-	  <div id="canvas_pie" style='width: 40%; height: 360px;'></div>
+	  <div id="canvas" style='width: 60%; height: 240px;'></div>
+      <div id="canvas_pie" style='width: 40%; height: 240px;'></div>
 	</div>
+    <div id="canvas_tm" style='height: 180px;'></div>
 	<div id="info_all">
 	  <div id="currencyInfo" style=' width: 400px; height: 240px;'></div>
 	  <div id="dayDetail" style=' width: 800px; height: 240px;'></div>
