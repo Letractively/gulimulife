@@ -1,10 +1,65 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>GulimuLife Everyday</title>
+    <title>Record everyday of Gulimujyujyu</title>
 </head>
+
 <body>
+
+<div id="header">
+    {% if user %}
+    <span id="state" class="green"></span>
+    <span id="user_name">{{user_nickname}}</span>
+    <span id="user_email">{{user.email}}</span>
+    {% for one_action in action_list%}
+    <span id="action_list_item"><a href={{one_action.action_content}}>{{one_action.action_name}}</a></span>
+    {% endfor %}
+    <span id="back"><a href="..">Back</a></span>
+    {% else %}
+    <span id="state" class="red"></span>
+    <span id="user_name">Anonymous.</span>
+    {% for one_action in action_list%}
+    <span id="action_list_item"><a href={{one_action.action_content}}>{{one_action.action_name}}</a></span>
+    {% endfor %}
+    <span id="back"><a href="..">Back</a></span>
+    {% endif %}
+</div>
+
+<div id="content">
+    <div id="timeline">
+        <div id="tl_display"></div>
+        <div id="tl_filter"></div>
+    </div>
+    <div id="summary_tab">
+        <div id="thing">
+            <div id="th_treemap"></div>
+            <div id="th_calendarview"></div>
+        </div>
+        <div id="mood">
+            <div id="md_treemap"></div>
+            <div id="md_calendarview"></div>
+        </div>
+        <div id="tag">
+            <div id="tg_tagcloud"></div>
+        </div>
+    </div>
+</div>
+
+<div id="footer">
+    {% if revoke_token_link %}
+    <div id="oauth_status">
+        <span id="sig_method">{{sig_method}}&nbsp;</span>
+        <span id="consumer_key">{{access_token.consumer_key}}&nbsp;</span>
+        <span id="consumer_secret">{{access_token.consumer_secret}}&nbsp;</span>
+        <span id="auth_state">{{access_token.auth_state}}</span>
+        <span id="oauth_token_key">{{access_token.token}}&nbsp;</span>
+        <span id="oauth_token_secret">{{access_token.token_secret}}&nbsp;</span>
+    </div>
+    {% endif %}
+    <span id="author">Gulimujyujyu</span>
+    <span id="copyright">Copyright &copy; 2011</span>
+</div>
 
 </body>
 </html>
+ 
+

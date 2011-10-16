@@ -166,7 +166,7 @@ class FetchData(OAuthDance):
     def post(self):
         """Fetches the user's data."""
 
-        calendarId = self.request.get('calId', default_value=constants.Constants.CAL_MONEY_ID);
+        calendarId = self.request.get('calId');
         projection = self.request.get('proj', default_value=constants.Constants.CAL_PROJECTION);
         start_min = self.request.get('start-min', default_value=constants.Constants.CAL_START)
         start_max = self.request.get('start-max', default_value=constants.Constants.CAL_END)
@@ -186,7 +186,7 @@ class FetchData(OAuthDance):
             #response = gcal.Get(feed_url, converter=str)
             #self.response.out.write(response)javascript:;
             if isinstance(response, atom.Feed):
-                reg = re.compile(r"^[A-z0-9.]+[\|]{2}[A-Z]{3}[\d.]+$")
+                reg = re.compile(r"^[\w.]+[\|]{2}[A-Z]{3}[\d.]+([$]{2}(\w+[,;]?)+)?$")
                 for entry in response.entry:
                     tmpWhen = None
                     for lala in entry.extension_elements:
@@ -196,7 +196,10 @@ class FetchData(OAuthDance):
                         startTime = ''
                     else:
                         startTime = tmpWhen.get('startTime')
+
+                    #logging.info(entry.title.text)
                     if reg.match(entry.title.text):
+                        #logging.info('Pass the re:'+entry.title.text)
                         json.append({'title': entry.title.text,
                                      'links': {'alternate': entry.GetHtmlLink().href},
                                      'published': entry.published.text,
@@ -205,10 +208,10 @@ class FetchData(OAuthDance):
                                      })
             #    json = [{"state":"Feed Format"}];
             elif isinstance(response, atom.Entry):
-                json.append({'title': response.title.text})
+                json = {'title': response.title.text}
             #    json = [{"state":"Entry Format"}];
             else:
-                json = [{"state":"Unknown Format"}];
+                json = {"state":"Unknown Format"}
 
                 #feed = gcal.GetCalendarListFeed()
 
@@ -217,7 +220,7 @@ class FetchData(OAuthDance):
                 #    })
             self.response.out.write(simplejson.dumps(json))
         except gdata.service.RequestError, error:
-            json = [{"state":error}];
+            json = {"error": 'Unkown Error'};
             self.response.out.write(simplejson.dumps(json))
             pass
             #OAuthDance.post(self)

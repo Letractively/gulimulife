@@ -3,6 +3,8 @@
 #canvas_all{float:left; width:1200px;}
 #canvas_pie{float:right}
 #canvas{float:left}
+
+#canvas_tm{float:left; width:1200px;}
 #currentInfo{float:left; }
 #dayDetail{float:right; }
 
