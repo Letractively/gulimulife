@@ -2,15 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="37bbb182-19d2-42ba-a27f-cac6588e586f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/everyday/css/main.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/everyday/js/main.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/img/glyphicons-halflings-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/img/glyphicons-halflings.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/css/bootstrap-responsive.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/css/bootstrap.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/css/main.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/js/bootstrap-alert.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/js/bootstrap-button.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/js/bootstrap-carousel.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/js/bootstrap-collapse.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/js/bootstrap-dropdown.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/js/bootstrap-modal.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/js/bootstrap-popover.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/js/bootstrap-scrollspy.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/js/bootstrap-tab.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/js/bootstrap-tooltip.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/js/bootstrap-transition.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/js/bootstrap-typeahead.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/js/bootstrap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/js/jquery.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/js/raphael-min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/templates/base.html" />
+      <change type="DELETED" beforePath="E:\Gulimujyujyu\gulimulife\src\templates\home.html" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gulimulife.iml" afterPath="$PROJECT_DIR$/.idea/gulimulife.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Google_App_Engine_SDK.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Google_App_Engine_SDK.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gulimu_calendar/calendar_oauth.py" afterPath="$PROJECT_DIR$/src/gulimu_calendar/calendar_oauth.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gulimu_everyday/everyday.py" afterPath="$PROJECT_DIR$/src/gulimu_everyday/everyday.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gulimulife.py" afterPath="$PROJECT_DIR$/src/gulimulife.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.yaml" afterPath="$PROJECT_DIR$/src/index.yaml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/static/calendar/css/calendar.css" afterPath="$PROJECT_DIR$/src/static/calendar/css/calendar.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/static/tenthousands/main.css" afterPath="$PROJECT_DIR$/src/static/tenthousands/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/static/travelmap/travelmap.css" afterPath="$PROJECT_DIR$/src/static/travelmap/travelmap.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/templates/calendar/calendar.html" afterPath="$PROJECT_DIR$/src/templates/calendar/calendar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/templates/everyday/everyday.html" afterPath="$PROJECT_DIR$/src/templates/everyday/everyday.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/constants.py" afterPath="$PROJECT_DIR$/src/utils/constants.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/templates/index.html" afterPath="$PROJECT_DIR$/src/templates/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/templates/tenthousand/tenthousand.html" afterPath="$PROJECT_DIR$/src/templates/tenthousand/tenthousand.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/templates/travelmap/travelmap.html" afterPath="$PROJECT_DIR$/src/templates/travelmap/travelmap.html" />
     </list>
     <ignored path="gulimulife.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,7 +49,6 @@
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
-    <option name="REVERSE_PATCH" value="false" />
   </component>
   <component name="DaemonCodeAnalyzer">
     <disable_hints />
@@ -33,37 +58,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="calendar_oauth.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gulimu_calendar/calendar_oauth.py">
+      <file leaf-file-name="travelmap.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/templates/travelmap/travelmap.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="203" column="60" selection-start="8008" selection-end="8008" vertical-scroll-proportion="0.0">
+            <state line="11" column="71" selection-start="430" selection-end="430" vertical-scroll-proportion="-4.2881355">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="constants.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utils/constants.py">
+      <file leaf-file-name="default.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/static/default.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="4" selection-start="220" selection-end="220" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="calendar.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/templates/calendar/calendar.html">
+      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/static/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="123" column="88" selection-start="3399" selection-end="3399" vertical-scroll-proportion="0.5714286">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="calendar.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/static/calendar/css/calendar.css">
+      <file leaf-file-name="travelmap.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/static/travelmap/travelmap.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="0" selection-start="122" selection-end="122" vertical-scroll-proportion="0.0">
+            <state line="19" column="22" selection-start="213" selection-end="213" vertical-scroll-proportion="-8.518518">
               <folding />
             </state>
           </provider>
@@ -76,31 +101,33 @@
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
   </component>
-  <component name="Git.Settings">
-    <option name="CHECKOUT_INCLUDE_TAGS" value="false" />
-    <option name="UPDATE_CHANGES_POLICY" value="STASH" />
-  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/gulimu_trevalmap/travelmap.py" />
-        <option value="$PROJECT_DIR$/src/gulimu_everyday/__init__.py" />
-        <option value="$PROJECT_DIR$/src/gulimu_everyday/README.md" />
-        <option value="$PROJECT_DIR$/src/app.yaml" />
-        <option value="$PROJECT_DIR$/src/templates/index.html" />
-        <option value="$PROJECT_DIR$/src/templates/tenthousand/tenthousand.html" />
-        <option value="$PROJECT_DIR$/src/templates/travelmap/travelmap.html" />
-        <option value="$PROJECT_DIR$/src/static/travelmap/modalbox.css" />
-        <option value="$PROJECT_DIR$/src/gdata/calendar/data.py" />
-        <option value="$PROJECT_DIR$/svn.ignore" />
         <option value="$PROJECT_DIR$/src/gulimu_everyday/everyday.py" />
         <option value="$PROJECT_DIR$/src/templates/everyday/everyday.html" />
-        <option value="$PROJECT_DIR$/src/static/calendar/css/calendar.css" />
         <option value="$PROJECT_DIR$/src/utils/constants.py" />
         <option value="$PROJECT_DIR$/src/gulimu_calendar/calendar_oauth.py" />
+        <option value="$PROJECT_DIR$/src/templates/home.html" />
+        <option value="$PROJECT_DIR$/src/static/css/main.css" />
+        <option value="$PROJECT_DIR$/src/gulimulife.py" />
+        <option value="$PROJECT_DIR$/src/templates/index.html" />
+        <option value="$PROJECT_DIR$/src/static/everyday/css/main.css" />
+        <option value="$PROJECT_DIR$/src/static/calendar/css/calendar.css" />
         <option value="$PROJECT_DIR$/src/templates/calendar/calendar.html" />
+        <option value="$PROJECT_DIR$/src/static/tenthousands/main.css" />
+        <option value="$PROJECT_DIR$/src/templates/tenthousand/tenthousand.html" />
+        <option value="$PROJECT_DIR$/src/templates/base.html" />
+        <option value="$PROJECT_DIR$/src/static/travelmap/travelmap.css" />
+        <option value="$PROJECT_DIR$/src/templates/travelmap/travelmap.html" />
       </list>
     </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="74" />
+    <option name="y" value="-9" />
+    <option name="width" value="1535" />
+    <option name="height" value="918" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -144,7 +171,16 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Favorites" />
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -152,10 +188,6 @@
               <option name="myItemId" value="gulimulife" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -196,110 +228,30 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="everyday" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="calendar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="calendar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="editor.preferences.appearance" />
+    <property name="options.lastSelected" value="preferences.sourceCode.General" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <PyConsoleSettings />
+    </option>
+    <option name="myDjangoConsoleState">
+      <PyConsoleSettings />
+    </option>
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -308,26 +260,8 @@
       <recent name="$PROJECT_DIR$/src/gulimu_calendar" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.step1">
-    <configuration default="false" name="step1" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <module name="gulimulife" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/step1.py" />
-      <option name="PARAMETERS" value="" />
-      <RunnerSettings RunnerId="PyDebugRunner" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PyDebugRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
-    <configuration default="true" type="PythonUnitTestConfigurationType" factoryName="Python's unittest">
+  <component name="RunManager" selected="App Engine server.Localhost">
+    <configuration default="true" type="Python.AppEngineServer" factoryName="App Engine server">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -335,13 +269,10 @@
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <module name="gulimulife" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="PUREUNITTEST" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="browserUrl" value="" />
+      <option name="additionalOptions" value="" />
       <method />
     </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
@@ -354,11 +285,13 @@
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <module name="gulimulife" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
+      <option name="MULTIPROCESS" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="PythonDocTestRunConfigurationType" factoryName="Python's doctests">
+    <configuration default="true" type="tests" factoryName="Unittests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -366,20 +299,64 @@
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <module name="gulimulife" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="" />
       <option name="CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
       <option name="FOLDER_NAME" value="" />
       <option name="TEST_TYPE" value="TEST_SCRIPT" />
       <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <module name="gulimulife" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
+      <JSDebuggerConfigurationSettings>
+        <option name="engineId" />
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
+      <method />
+    </configuration>
+    <configuration default="false" name="Localhost" type="Python.AppEngineServer" factoryName="App Engine server">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="C:/Python27/python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <module name="gulimulife" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="browserUrl" value="" />
+      <option name="additionalOptions" value="" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
     <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Python.step1" />
+      <item index="0" class="java.lang.String" itemvalue="App Engine server.Localhost" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration" maxAnnotateRevisions="500">
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="true">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
     <option name="mySSHConnectionTimeout" value="30000" />
@@ -394,7 +371,7 @@
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
     <option name="FORCE_UPDATE" value="false" />
-    <configuration useDefault="true">$USER_HOME$/.subversion_IDEA</configuration>
+    <configuration useDefault="true">C:\Users\xlzhu\AppData\Roaming\Subversion</configuration>
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
     <supportedVersion>125</supportedVersion>
   </component>
@@ -402,16 +379,16 @@
     <option name="myMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="$PROJECT_DIR$" />
-          <option name="myCopyRoot" value="$PROJECT_DIR$" />
+          <option name="myVcsRoot" value="E:\Gulimujyujyu\gulimulife" />
+          <option name="myCopyRoot" value="E:\Gulimujyujyu\gulimulife" />
         </SvnCopyRootSimple>
       </list>
     </option>
     <option name="myMoreRealMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="$PROJECT_DIR$" />
-          <option name="myCopyRoot" value="$PROJECT_DIR$" />
+          <option name="myVcsRoot" value="E:\Gulimujyujyu\gulimulife" />
+          <option name="myCopyRoot" value="E:\Gulimujyujyu\gulimulife" />
         </SvnCopyRootSimple>
       </list>
     </option>
@@ -424,27 +401,53 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="51" y="22" width="1229" height="778" extended-state="0" />
+    <frame x="74" y="-9" width="1535" height="918" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3272727" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3261745" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42684564" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32885906" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32781458" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14854772" sideWeight="0.6727273" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18515997" sideWeight="0.67114097" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39966556" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3489933" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32781458" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
@@ -470,7 +473,16 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
+    <option name="SHORT_DIFF_HORISONTALLY" value="true" />
+    <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
+    <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
+    <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
+    <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
     <option name="LAST_COMMIT_MESSAGE" value="Fix Issue 3;&#10;Fix Issue 4" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
@@ -493,7 +505,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/src/gulimulife.py</url>
-          <line>24</line>
+          <line>26</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/src/gulimu_everyday/everyday.py</url>
@@ -503,94 +515,116 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/static/index.html">
+    <entry file="file://$PROJECT_DIR$/src/gulimu_calendar/calendar_oauth.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gdata/calendar/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="38" selection-start="1342" selection-end="1342" vertical-scroll-proportion="-4.6153846" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gdata/calendar/data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="36" selection-start="1104" selection-end="1107" vertical-scroll-proportion="0.87431693" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/atom/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="6" selection-start="2045" selection-end="2045" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gdata/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="4" selection-start="1837" selection-end="1837" vertical-scroll-proportion="-0.15315315" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gulimu_everyday/everyday.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="19" selection-start="2500" selection-end="2500" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gdata/gauth.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="929" column="4" selection-start="35780" selection-end="35948" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gdata/calendar/service.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="40" selection-start="1392" selection-end="1392" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gdata/service.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="565" column="47" selection-start="22659" selection-end="22659" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/static/everyday/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/static/everyday/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/templates/everyday/everyday.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="14" selection-start="1208" selection-end="1208" vertical-scroll-proportion="-5.2916665">
+        <state line="203" column="60" selection-start="8008" selection-end="8008" vertical-scroll-proportion="0.032033425">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/constants.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="4" selection-start="220" selection-end="220" vertical-scroll-proportion="0.0">
+        <state line="11" column="4" selection-start="220" selection-end="220" vertical-scroll-proportion="0.2987013">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="14" selection-start="576" selection-end="576" vertical-scroll-proportion="1.0250696">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gulimulife.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="25" selection-start="660" selection-end="660" vertical-scroll-proportion="-12.88">
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="0" selection-start="26" selection-end="26" vertical-scroll-proportion="0.052154195">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/static/everyday/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/static/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="31" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/static/calendar/css/calendar.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="122" selection-end="122" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gulimu_calendar/calendar_oauth.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="203" column="60" selection-start="8008" selection-end="8008" vertical-scroll-proportion="0.0">
+        <state line="0" column="75" selection-start="75" selection-end="75" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/templates/calendar/calendar.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="123" column="88" selection-start="3399" selection-end="3399" vertical-scroll-proportion="0.5714286">
+        <state line="7" column="14" selection-start="308" selection-end="308" vertical-scroll-proportion="-24.00242">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/static/tenthousands/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="22" selection-start="220" selection-end="220" vertical-scroll-proportion="0.68445474">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/templates/tenthousand/tenthousand.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="282" column="21" selection-start="13304" selection-end="13304" vertical-scroll-proportion="0.37530267">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="5" selection-start="990" selection-end="990" vertical-scroll-proportion="15.09375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/static/travelmap/travelmap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="22" selection-start="213" selection-end="213" vertical-scroll-proportion="-8.518518">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/templates/travelmap/travelmap.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="71" selection-start="430" selection-end="430" vertical-scroll-proportion="-4.2881355">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/static/default.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/static/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>

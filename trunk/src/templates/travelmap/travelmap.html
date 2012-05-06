@@ -1,9 +1,13 @@
-<html>
-<head>
+{% extends "../base.html" %}
 
+{% block logo_name %}Trip Planner{% endblock %}
+
+{% block more_css_include %}
 <link type="text/css" rel="stylesheet" href="/static/travelmap/travelmap.css"/>
 <link type="text/css" rel="stylesheet" href="/static/travelmap/modalbox.css"/>
+{% endblock %}
 
+{% block more_js_include %}
 <!--Implement by Prototype & Script.aculo.us-->
 <script type='text/javascript' src='http://www.google.com/jsapi'></script>
 <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/prototype/1.6.1.0/prototype.js'></script>
@@ -471,11 +475,11 @@ TravelMap.renderOneEntry = function (i,entry){
   return html;
 }
 </script>
+{% endblock %}
 
+{% block body_on_load %} onload="TravelMap.initialize()"{% endblock %}
 
-</head>
-<body onload="TravelMap.initialize()">
-
+{% block body %}
 <div id="wrapper">
   <div id="header">
     <div id="navibar">
@@ -488,7 +492,7 @@ TravelMap.renderOneEntry = function (i,entry){
       <div id="nb_trip_lat"></div>
       <div id="nb_trip_lon"></div>
       <div id="nb_trip_author"></div>
-      <input id="add_trip" type="button" value="New Trip">
+      <input class="btn" id="add_trip" type="button" value="New Trip">
       <div id="clear"></div>
       <!-- <span id="nb_time"></span> -->
     {% endif %}
@@ -530,15 +534,14 @@ TravelMap.renderOneEntry = function (i,entry){
   <div style="clear:both"></div>
   <div id="add_trip_window_map"><img src='http://maps.google.com/maps/api/staticmap?center=0,0&zoom=0&size=400x200&maptype=roadmap&sensor=false'></img></div>
   <p><span class="window_label">Latitude([-90,90])</span> <span class="window_input"><input type="text"/ id="add_trip_window_lat"></span></p>
-  <p><span class="window_label">Longitude([-180,180])</span> <span class="window_input"><input type="text"/ id="add_trip_window_lon"></span><input type="button" value="Show Location" onclick="TravelMap.updateImageMarker()"/></p>  
+  <p><span class="window_label">Longitude([-180,180])</span> <span class="window_input"><input type="text"/ id="add_trip_window_lon"></span><input type="button" value="Show Location" onclick="TravelMap.updateImageMarker()"/></p>
   <p style="color:red">p.s. To get longitude and latitude, please click <a href="http://gmaps-samples-v3.googlecode.com/svn/trunk/geocoder/v3-geocoder-tool.html" target="_blank">here.</a></p>
-  <p><input type="button" value="Add Trip" onclick="TravelMap.submitOneTrip()"/><input type="button" value="Cancel" onclick="Modalbox.hide()"/><div id='error_msg' class="window_error" style="font-size:small;color:red"></div></p>
+  <p><input class="btn" type="button" value="Add Trip" onclick="TravelMap.submitOneTrip()"/><input class="btn" type="button" value="Cancel" onclick="Modalbox.hide()"/><div id='error_msg' class="window_error" style="font-size:small;color:red"></div></p>
   <!--
     <p><span class="add_trip_window_label">password</span> <span class="window_input"><input type="password" id="add_trip_window"/></span></p>
   <div style="clear:both"></div>
   -->
 </div>
-</body>
-</html>
+{% endblock %}
  
 
