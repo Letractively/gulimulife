@@ -1,24 +1,36 @@
-<html>
-	<head>
-		<meta name="google-site-verification" content="T4-1d9qZ7zwB0NGA33op1EwDl6tp6b13Hk9E_8eEkSg" />
-		<title>Gulimujyujyu's Life</title>
-	</head>
-    <body>
-        <h1>User</h1>
-        <a href="{{ url }}">{{ url_linktext }}</a>
-		<h2>Services</h2>
-	    <p>
-	    	<a href="calendar">Calendar</a>
-		</p>
-		<p>
-            <a href="travelmap">Propose a Travel Plan</a>
-        </p>
-        <p>
-            <a href="tenthousand">Wishes within Ten Thousand Days</a>
-        </p>
-        <p>
-            <a href="everyday">Everyday Life</a>
-        </p>
+{% extends "base.html" %}
 
-    </body>
-</html>
+{% block body %}
+<div id="body" class="container">
+  <div class="row">
+    <div class="span12">
+      <ul class="thumbnails porfolio">
+        <li class="span2">
+          <a rel="popover" href="/calendar" class="thumbnail" data-content="Daily Cost"
+             data-original-title="Calendar for My Daily Cost">
+            <img src=" http://placehold.it/160x120" alt="Daily Cost"/>
+          </a>
+        </li>
+        <li class="span2">
+          <a href="/travelmap" class="thumbnail" data-content="Travel Map for my Trip"
+             data-original-title="TravelMap">
+            <img src=" http://placehold.it/160x120" alt="Travel Map"/>
+          </a>
+        </li>
+        <li class="span2">
+          <a href="/tenthousand" class="thumbnail" data-content="Wishes within my first 10000 days."
+             data-original-title="Checklist for my first 10000 days">
+            <img src=" http://placehold.it/160x120" alt="Checklist for my first 10000 days"/>
+          </a>
+        </li>
+        <li class="span2">
+          <a href="/everyday" class="thumbnail" data-content="Visualize my every day life."
+             data-original-title="Everyday">
+            <img src=" http://placehold.it/160x120" alt="Everyday Life"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div> <!-- #body -->
+{% endblock %}

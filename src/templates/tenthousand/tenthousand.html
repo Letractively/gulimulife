@@ -1,16 +1,19 @@
-<html>
-<head>
+{% extends "../base.html" %}
 
+{% block logo_name %}Wishes{% endblock %}
+
+{% block more_css_include %}
 <link type="text/css" href="/static/css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
-<script type="text/javascript" src="/static/js/jquery-1.6.2.min.js"></script>
-<script type="text/javascript" src="/static/js/jquery-ui-1.8.16.custom.min.js"></script>
-
 <link rel="stylesheet" type="text/css" media="all" href="/static/css/960/text.css"> 
 <link rel="stylesheet" type="text/css" media="all" href="/static/css/960/960.css"> 
 <link rel="stylesheet" type="text/css" media="all" href="/static/css/960/reset.css">
-
 <link rel="stylesheet" type="text/css" media="all" href="/static/tenthousands/main.css">
 <link href='http://fonts.googleapis.com/css?family=Special+Elite' rel='stylesheet' type='text/css'>
+{% endblock %}
+
+{% block more_js_include %}
+<script type="text/javascript" src="/static/js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery-ui-1.8.16.custom.min.js"></script>
 <script type="text/javascript" src="/static/tenthousands/jquery.inlineedit.js"></script>
     
 <script type="text/javascript" src="/static/js/jquery.json-2.2.min.js"></script>
@@ -277,7 +280,7 @@
             width: 350,
             modal: true,
             buttons: {
-                "Create an account": function() {
+                "Save": function() {
                     
                     var bValid = true;
                     allFields.removeClass( "ui-state-error" );
@@ -337,9 +340,9 @@
         }, "json");
     });
 </script>
-</head>
+{% endblock %}
 
-<body>
+{% block body %}
     <div id="hdr" class="container_12">
         <div id="ts_hdr" class="grid_12"><h1>Hello {{user}}!</h1></div>
         <div class="clear"></div>
@@ -377,6 +380,5 @@
         <div class="clear"></div>
     </div>
     <div id="dia1"><p>Insert failed!</p></div>
-</body>
 
-</html>
+{% endblock %}

@@ -9,10 +9,15 @@
   
 }
 
+input,select {
+    height: auto;
+    width: auto;
+}
+
 #navibar{
-  height: 20px;
+  height: 30px;
   width:1000px;
-  font-size:medium;
+    line-height: 28px;
 }
 
 #nb_status{
@@ -82,7 +87,6 @@
 }
 
 #add_trip {
-  height: 20px;
   margin-right:8px;
 }
 /*content*/

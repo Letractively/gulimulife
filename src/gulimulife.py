@@ -10,7 +10,8 @@ class MainPage(webapp.RequestHandler):
     
     def get(self):
 
-        if users.get_current_user():
+        user = users.get_current_user()
+        if user:
             url = users.create_logout_url(self.request.uri)
             url_linktext = 'Logout'
         else:
@@ -18,7 +19,8 @@ class MainPage(webapp.RequestHandler):
             url_linktext = 'Login'
 
         template_values = {
-            'url': url,
+            'user': user,
+            'user_url': url,
             'url_linktext': url_linktext,
             }
 

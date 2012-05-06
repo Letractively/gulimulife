@@ -1,3 +1,11 @@
+body {
+    padding-top: 60px;
+}
+
+input, textarea, select, .uneditable-input {
+    height: 28px;
+}
+
 #ts_hdr h1{
     font-size: 50px;
     font-family: 'Special Elite', arial, serif; 
@@ -91,6 +99,7 @@
 
 .selectable {
     margin-top: 8px;
+    width: auto;
 }
 /*
 .entry_result:hover {
