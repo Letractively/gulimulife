@@ -20,8 +20,15 @@
 
 {% block more_js_include %}
   <script src="/static/js/jquery.js"></script>
+
+  <script src="/static/js/bootstrap-transition.js"></script>
+  <script src="/static/js/bootstrap-alert.js"></script>
+  <script src="/static/js/bootstrap-modal.js"></script>
+  <script src="/static/js/bootstrap-dropdown.js"></script>
   <script src="/static/js/bootstrap-tooltip.js"></script>
   <script src="/static/js/bootstrap-popover.js"></script>
+  <script src="/static/js/bootstrap-button.js"></script>
+  <script src="/static/js/bootstrap-collapse.js"></script>
 
   <script>
     $(document).ready(function(){
@@ -43,7 +50,10 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="#">{% block logo_name %} GulimuLife {% endblock %}</a>
+      <a class="brand" href="#">
+        <img class="site-box-shadow site-mini-logo" src="/static/img/gulimujyujyu-logo-28x28.png" alt="logo">
+        {% block logo_name %} GulimuLife {% endblock %}
+      </a>
 
       <div class="nav-collapse">
         <ul class="nav">
