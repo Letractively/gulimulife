@@ -1,9 +1,24 @@
-<html>
-	<head>
-		<title>404</title>
-	</head>
-	
-	<body>
-		Page 404.
-	</body>
-</html>
+{% extends "base.html" %}
+
+{% block more_css_include %}
+  <link type="text/css" rel="stylesheet" href="/static/css/404.css">
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="span4 offset4">
+        <h3>404: PAGE NOT FOUND.</h3>
+        <p>&nbsp;</p>
+        <blockquote class="pull-left">
+          <p>Weird?</p>
+          <p>&nbsp;</p>
+          <p>Cause it's a bittersweet symphony,</p>
+          <p>this life.</p>
+
+          <small>The Verve</small>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+{% endblock %}

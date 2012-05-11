@@ -1,4 +1,4 @@
-from google.appengine.ext import webapp
+import webapp2
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.api import users
 from google.appengine.ext.webapp import template
@@ -6,7 +6,7 @@ from google.appengine.ext.webapp import template
 from utils import constants
 import os
 
-class MainPage(webapp.RequestHandler):
+class MainPage(webapp2.RequestHandler):
     
     def get(self):
 
@@ -27,12 +27,8 @@ class MainPage(webapp.RequestHandler):
         path = os.path.join(constants.Constants.TEMPLATE_PATH, 'index.html')
         self.response.out.write(template.render(path, template_values))
 
-def main():
-    url_map = [('/.*', MainPage), ];
-             
-    application = webapp.WSGIApplication(url_map, debug=True)
-    run_wsgi_app(application)
+app = webapp2.WSGIApplication([('/.*', MainPage), ], debug=True)
 
-if __name__ == "__main__":
-    main()
+
+
 

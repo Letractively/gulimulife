@@ -1,4 +1,4 @@
-{% extends "../base.html" %}
+{% extends "base.html" %}
 
 {% block logo_name %}Money Chart{% endblock %}
 
@@ -488,7 +488,7 @@
   }
 
   function CurrencyConverter(amount, fromCur, toCur) {
-    var feedUrl = {{converter_url}};
+    var feedUrl = {{converter_url|safe}};
     var moneyReg = /[0-9.]+/g;
     $.post(feedUrl, {'amount':amount, 'fromCur':fromCur, 'toCur':toCur},
         function (data) {
@@ -527,9 +527,12 @@
       <div class="alert alert-info">
         <a class="close" data-dismiss="alert">×</a>
         <h4 class="alert-heading">Step 1: Select the Money Calendar</h4>
+
         <p>Click <span class="badge">Get Calendars</span> to obtain the list of available calendars. </p>
         <h4 class="alert-heading">Step 2: Choose the range</h4>
-        <p>Choose <span class="badge">From</span> and  <span class="badge">To</span> as the range. Then Click  <span class="badge">Now fetch my calendars!</span>.</p>
+
+        <p>Choose <span class="badge">From</span> and <span class="badge">To</span> as the range. Then Click <span
+            class="badge">Now fetch my calendars!</span>.</p>
       </div>
     </div>
   </div>
@@ -571,16 +574,18 @@
     </div>
 
   {% else %}
-    <table id="fill">
-      <tr>
-        <td>
-          <form class="well" action="{{ form_action }}" method="post">
-            <input type="submit" value="{{ form_value }}" class="rounded button"><br><br>
-            Use my Google Apps domain: &nbsp; <input type="text" name="domain" value="default">
-          </form>
-        </td>
-      </tr>
-    </table>
+    <div id="content">
+      <table id="fill">
+        <tr>
+          <td>
+            <form class="well" action="{{ form_action }}" method="post">
+              <input type="submit" value="{{ form_value }}" class="btn rounded button"><br><br>
+              Use my Google Apps domain: &nbsp; <input type="text" name="domain" value="default">
+            </form>
+          </td>
+        </tr>
+      </table>
+    </div>
   {% endif %}
 
   {% if revoke_token_link %}

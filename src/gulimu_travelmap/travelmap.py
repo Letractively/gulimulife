@@ -10,17 +10,16 @@ import cgi
 import re
 import os
 
-from django.utils import simplejson
+import json as simplejson
 from google.appengine.api import users
-from google.appengine.ext.webapp.util import run_wsgi_app
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp import template
+import webapp2
+from django.template import loader as django_loader
 
 from google.appengine.ext import db
 
 from utils import constants
 
-#TODO: 1.geo, 2.rating, 3.time
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
 #begin{Models}
 class Trip(db.Model):
@@ -46,7 +45,7 @@ class Memo(db.Model):
 
 travelmap_prefix = '/travelmap'
 
-class MainPage(webapp.RequestHandler):
+class MainPage(webapp2.RequestHandler):
     title = 'MainPage'
 
     # GET /
@@ -58,12 +57,11 @@ class MainPage(webapp.RequestHandler):
             'user': users.get_current_user(),
         }
 
-        path = os.path.join(constants.Constants.TEMPLATE_PATH, 'travelmap/travelmap.html')
-        self.response.out.write(template.render(path, template_values))
+        self.response.out.write(django_loader.render_to_string('travelmap/travelmap.html', template_values))
         
         
 
-class FetchTrip(webapp.RequestHandler):
+class FetchTrip(webapp2.RequestHandler):
     # GET
     def get(self):
         if not users.get_current_user():
@@ -96,7 +94,7 @@ class FetchTrip(webapp.RequestHandler):
             self.response.out.write("[{state:error}]")
             pass
 
-class FetchOneTrip(webapp.RequestHandler):
+class FetchOneTrip(webapp2.RequestHandler):
     # GET
     def get(self):
         if not users.get_current_user():
@@ -130,7 +128,7 @@ class FetchOneTrip(webapp.RequestHandler):
             self.response.out.write("[{state:error}]")
             pass
 
-class AddTrip(webapp.RequestHandler):
+class AddTrip(webapp2.RequestHandler):
     # GET
     def get(self):
         self.post();
@@ -168,7 +166,7 @@ class AddTrip(webapp.RequestHandler):
         #self.response.out.write("[{state:200}]")
         #time = self.request.get('time');
 
-class FetchInformation(webapp.RequestHandler):
+class FetchInformation(webapp2.RequestHandler):
     # GET
     def get(self):
         if not users.get_current_user():
@@ -197,7 +195,7 @@ class FetchInformation(webapp.RequestHandler):
             self.response.out.write("[{state:error}]")
             pass
         
-class AddInformation(webapp.RequestHandler):
+class AddInformation(webapp2.RequestHandler):
     # GET
     def get(self):
         self.post();
@@ -256,7 +254,7 @@ class AddInformation(webapp.RequestHandler):
         self.response.out.write(simplejson.dumps(json))
         #time = self.request.get('time');
 
-class AddInformationContent(webapp.RequestHandler):
+class AddInformationContent(webapp2.RequestHandler):
     def get(self):
         self.post();
         
@@ -307,7 +305,7 @@ class AddInformationContent(webapp.RequestHandler):
             self.response.out.write("No content")
         
         
-class FetchMemo(webapp.RequestHandler):
+class FetchMemo(webapp2.RequestHandler):
     # GET
     def get(self):
         if not users.get_current_user():
@@ -335,7 +333,7 @@ class FetchMemo(webapp.RequestHandler):
             self.response.out.write("[{state:error}]")
             pass
         
-class AddMemo(webapp.RequestHandler):
+class AddMemo(webapp2.RequestHandler):
     # GET
     def get(self):
         if not users.get_current_user():
@@ -367,17 +365,14 @@ class AddMemo(webapp.RequestHandler):
         self.response.out.write("[{state:200}]")
         #time = self.request.get('time');
         
-class ErrorPage(webapp.RequestHandler):
+class ErrorPage(webapp2.RequestHandler):
     
     def get(self):
-        path = os.path.join(constants.Constants.TEMPLATE_PATH, '404.html');
-        
         template_dict = {
             "error_source": "TravelMap"};
-        self.response.out.write(template.render(path, template_dict));
+        self.response.out.write(django_loader.render_to_string('404.html', template_dict));
 
-def main():
-    application = webapp.WSGIApplication([(travelmap_prefix, MainPage),
+app = webapp2.WSGIApplication([(travelmap_prefix, MainPage),
                                           (travelmap_prefix + '/fetch_trip', FetchTrip),
                                           (travelmap_prefix + '/fetch_trip_content', FetchOneTrip),
                                           (travelmap_prefix + '/add_trip', AddTrip),
@@ -388,7 +383,3 @@ def main():
                                           (travelmap_prefix + '/add_memo', AddMemo),
                                           (travelmap_prefix + '.*', ErrorPage)],
                                          debug=True)
-    run_wsgi_app(application)
-
-if __name__ == '__main__':
-    main()

@@ -42,7 +42,7 @@ from time import strftime
 from google.appengine.ext import db
 from google.appengine.api import memcache
 
-from django.utils import simplejson
+import json
 
 # settings
 try:
@@ -340,7 +340,7 @@ class _DatastoreWriter(object):
         if session.cookie_vals.has_key(keyname):
             del(session.cookie_vals[keyname])
             session.output_cookie["%s_data" % (session.cookie_name)] = \
-                simplejson.dumps(session.cookie_vals)
+                json.dumps(session.cookie_vals)
             session.output_cookie["%s_data" % (session.cookie_name)]["path"] = \
                 session.cookie_path
             if session.cookie_domain:
@@ -382,14 +382,14 @@ class _CookieWriter(object):
         if value is None:
             raise ValueError(u"You must pass a value to put.")
 
-        # Use simplejson for cookies instead of pickle.
+        # Use json for cookies instead of pickle.
         session.cookie_vals[keyname] = value
         # update the requests session cache as well.
         session.cache[keyname] = value
-        # simplejson will raise any error I'd raise about an invalid value
+        # json will raise any error I'd raise about an invalid value
         # so let it raise exceptions
         session.output_cookie["%s_data" % (session.cookie_name)] = \
-            simplejson.dumps(session.cookie_vals)
+            json.dumps(session.cookie_vals)
         session.output_cookie["%s_data" % (session.cookie_name)]["path"] = \
             session.cookie_path
         if session.cookie_domain:
@@ -533,14 +533,14 @@ class Session(object):
             self.cookie.load(string_cookie)
             try:
                 self.cookie_vals = \
-                    simplejson.loads(self.cookie["%s_data" % (self.cookie_name)].value)
+                    json.loads(self.cookie["%s_data" % (self.cookie_name)].value)
                     # sync self.cache and self.cookie_vals which will make those
                     # values available for all gets immediately.
                 for k in self.cookie_vals:
                     self.cache[k] = self.cookie_vals[k]
                     # sync the input cookie with the output cookie
                     self.output_cookie["%s_data" % (self.cookie_name)] = \
-                        simplejson.dumps(self.cookie_vals) #self.cookie["%s_data" % (self.cookie_name)]
+                        json.dumps(self.cookie_vals) #self.cookie["%s_data" % (self.cookie_name)]
             except Exception, e:
                 self.cookie_vals = {}
 
@@ -719,7 +719,7 @@ class Session(object):
         self.cookie_vals = {}
         self.cache = {}
         self.output_cookie["%s_data" % (self.cookie_name)] = \
-            simplejson.dumps(self.cookie_vals)
+            json.dumps(self.cookie_vals)
         self.output_cookie["%s_data" % (self.cookie_name)]["path"] = \
             self.cookie_path
         if self.cookie_domain:
@@ -860,7 +860,7 @@ class Session(object):
         self.cache = {}
         self.cookie_vals = {}
         self.output_cookie["%s_data" %s (self.cookie_name)] = \
-            simplejson.dumps(self.cookie_vals)
+            json.dumps(self.cookie_vals)
         self.output_cookie["%s_data" % (self.cookie_name)]["path"] = \
             self.cookie_path
         if self.cookie_domain:
@@ -1094,7 +1094,7 @@ class Session(object):
             del self.cookie_vals[keyname]
             bad_key = False
             self.output_cookie["%s_data" % (self.cookie_name)] = \
-                simplejson.dumps(self.cookie_vals)
+                json.dumps(self.cookie_vals)
             self.output_cookie["%s_data" % (self.cookie_name)]["path"] = \
                 self.cookie_path
             if self.cookie_domain:
