@@ -12,27 +12,18 @@ from urlparse import urlparse
 from urlparse import urljoin
 
 from google.appengine.api import users
-from google.appengine.ext.webapp.util import run_wsgi_app
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp import template
-
-from appengine_utilities.sessions import Session
+import webapp2
+from django.template import loader as django_loader
 
 import gdata
 import gdata.calendar
-import gdata.calendar.service
-import gdata.calendar.data
 import gdata.calendar.client
-import gdata.acl.data
-import gdata.alt
-import gdata.alt.appengine
-import atom.data
 import time
 
 from utils import constants
 
 ##Globals
-SETTINGS = {
+AUTH_SETTINGS = {
   'APP_NAME': 'gulimulife',
   'CONSUMER_KEY': 'gulimulife.appspot.com',
   'CONSUMER_SECRET': 'P7ujwzNKRof2HmLS2L+Zj2zk',
@@ -40,12 +31,14 @@ SETTINGS = {
   'SCOPES': ['https://www.google.com/calendar/feeds/'],
   }
 
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+
 gcal = gdata.calendar.client.CalendarClient()
 
 everyday_prefix = '/everyday'
 
 #main page
-class MainPage(webapp.RequestHandler):
+class MainPage(webapp2.RequestHandler):
     title = 'Main Page'
 
     # GET /
@@ -84,11 +77,10 @@ class MainPage(webapp.RequestHandler):
             'access_token': access_token,
         }
 
-        path = os.path.join(constants.Constants.TEMPLATE_PATH, 'everyday/everyday.html')
-        self.response.out.write(template.render(path, template_values))
+        self.response.out.write(django_loader.render_to_string('everyday/everyday.html', template_values))
 
 #OAuth authorize
-class OAuthApply(webapp.RequestHandler):
+class OAuthApply(webapp2.RequestHandler):
     def get(self):
         """Fetches a request token and redirects the user to the approval page."""
 
@@ -103,8 +95,8 @@ class OAuthApply(webapp.RequestHandler):
             callback_url = urljoin(self.request.uri, 'get_oauth_token')
             #logging.info(callback_url)
             req_token = gcal.GetOAuthToken(
-                scopes=SETTINGS['SCOPES'], next=callback_url, consumer_key=SETTINGS['CONSUMER_KEY'],
-                consumer_secret = SETTINGS['CONSUMER_SECRET'])
+                scopes=AUTH_SETTINGS['SCOPES'], next=callback_url, consumer_key=AUTH_SETTINGS['CONSUMER_KEY'],
+                consumer_secret = AUTH_SETTINGS['CONSUMER_SECRET'])
 
             # When using HMAC, persist the token secret in order to re-create an
             # OAuthToken object coming back from the approval page.
@@ -126,7 +118,7 @@ class OAuthApply(webapp.RequestHandler):
             self.redirect(str(approval_page_url))
 
 #OAuth Handler Class
-class OAuthFinish(webapp.RequestHandler):
+class OAuthFinish(webapp2.RequestHandler):
 
     """Handler for the 3 legged OAuth dance, v1.0a."""
 
@@ -150,23 +142,17 @@ class OAuthFinish(webapp.RequestHandler):
 #Fetch Calendars Feed
 
 #404 page
-class ErrorPage(webapp.RequestHandler):
+class ErrorPage(webapp2.RequestHandler):
 
     def get(self):
-        path = os.path.join(constants.Constants.TEMPLATE_PATH, '404.html');
-
         template_dict = {
             "error_source": "Everyday"};
-        self.response.out.write(template.render(path, template_dict));
+        self.response.out.write(django_loader.render_to_string('404.html',template_dict));
 
 #manage links
-def main():
-    application = webapp.WSGIApplication([(everyday_prefix, MainPage),
+app = webapp2.WSGIApplication([(everyday_prefix, MainPage),
                                           (everyday_prefix + '/apply_oauth_token', OAuthApply),
                                           (everyday_prefix + '/get_oauth_token', OAuthFinish),
                                           (everyday_prefix + '.*', ErrorPage)],
                                          debug=True)
-    run_wsgi_app(application)
 
-if __name__ == '__main__':
-    main()

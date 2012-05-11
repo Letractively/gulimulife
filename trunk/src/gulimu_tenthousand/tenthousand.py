@@ -10,13 +10,15 @@ import os
 
 from google.appengine.api import users
 from google.appengine.ext.webapp.util import run_wsgi_app
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp import template
-from django.utils import simplejson
+import webapp2
+from django.template import loader as django_loader
+import json as simplejson
 from google.appengine.ext import db
 from datetime import datetime
 
 from utils import constants
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
 #define entries
 class Entry(db.Model):
@@ -33,7 +35,7 @@ class UserDate(db.Model):
     
 tenthousand_prefix = '/tenthousand'
 
-class MainPage(webapp.RequestHandler):
+class MainPage(webapp2.RequestHandler):
     title = 'Main Page'
     
     def get(self):
@@ -43,14 +45,13 @@ class MainPage(webapp.RequestHandler):
         template_values = {
             'user': users.get_current_user(),
         }
-        
-        path = os.path.join(constants.Constants.TEMPLATE_PATH, 'tenthousand/tenthousand.html')
-        self.response.out.write(template.render(path, template_values));
+
+        self.response.out.write(django_loader.render_to_string('tenthousand/tenthousand.html', template_values));
         
     def post(self):
         self.get();
 
-class FetchEntries(webapp.RequestHandler):
+class FetchEntries(webapp2.RequestHandler):
     title = 'Fetch entries'
     
     def get(self):
@@ -80,7 +81,7 @@ class FetchEntries(webapp.RequestHandler):
     def post(self):
         self.get()
         
-class FetchOneEntry(webapp.RequestHandler):
+class FetchOneEntry(webapp2.RequestHandler):
     title = 'Fetch entries'
     
     def get(self):
@@ -114,7 +115,7 @@ class FetchOneEntry(webapp.RequestHandler):
     def post(self):
         self.get()
         
-class AddOneEntry(webapp.RequestHandler):
+class AddOneEntry(webapp2.RequestHandler):
     title = 'Fetch entries'
     
     def get(self):
@@ -152,7 +153,7 @@ class AddOneEntry(webapp.RequestHandler):
             self.response.out.write("[{state:500}]")
             pass
 
-class PostOneEntry(webapp.RequestHandler):
+class PostOneEntry(webapp2.RequestHandler):
     title = 'Fetch entries'
     
     def get(self):
@@ -205,7 +206,7 @@ class PostOneEntry(webapp.RequestHandler):
             self.response.out.write("[{state:500}]")
             pass
 
-class DeleteOneEntry(webapp.RequestHandler):
+class DeleteOneEntry(webapp2.RequestHandler):
     title = 'Fetch entries'
     
     def get(self):
@@ -243,18 +244,15 @@ class DeleteOneEntry(webapp.RequestHandler):
             self.response.out.write("[{state:500}]")
             pass
 
-class ErrorPage(webapp.RequestHandler):
+class ErrorPage(webapp2.RequestHandler):
     
     def get(self):
-        path = os.path.join(constants.Constants.TEMPLATE_PATH, '404.html');
-        
         template_dict = {
             "error_source": "TenThousand"};
-        self.response.out.write(template.render(path, template_dict));
+        self.response.out.write(django_loader.render_to_string('404.html', template_dict));
 
 #manage links
-def main():
-    application = webapp.WSGIApplication([(tenthousand_prefix, MainPage),
+app = webapp2.WSGIApplication([(tenthousand_prefix, MainPage),
                                           (tenthousand_prefix + '/fetch_all_entries', FetchEntries),
                                           (tenthousand_prefix + '/fetch_one_entry', FetchOneEntry),
                                           (tenthousand_prefix + '/add_one_entry', AddOneEntry),
@@ -262,7 +260,4 @@ def main():
                                           (tenthousand_prefix + '/delete_one_entry', DeleteOneEntry),
                                           (tenthousand_prefix + '.*', ErrorPage)],
                                          debug=True)
-    run_wsgi_app(application)
 
-if __name__ == '__main__':
-    main()

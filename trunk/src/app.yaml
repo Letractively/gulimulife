@@ -1,39 +1,45 @@
 application: gulimulife
 version: 8
-runtime: python
+runtime: python27
 api_version: 1
+threadsafe: true
 
 handlers:
 - url: /static
   static_dir: static
   
 - url: /calendar.*
-  script: gulimu_calendar/calendar_oauth.py
+  script: gulimu_calendar.calendar_oauth.app
   login: required
 
 - url: /everyday.*
-  script: gulimu_everyday/everyday.py
+  script: gulimu_everyday.everyday.app
+  login: required
+
+- url: /soc.*
+  script: gulimu_soc.soc.app
   login: required
 
 - url: /travelmap.*
-  script: gulimu_travelmap/travelmap.py
+  script: gulimu_travelmap.travelmap.app
   login: required
   
-- url: /skillchart.*
-  script: gulimu_skillchart/skillchart.py
-  
 - url: /tenthousand.*
-  script: gulimu_tenthousand/tenthousand.py
+  script: gulimu_tenthousand.tenthousand.app
   login: required
 
 - url: /index\.html
-  script: gulimulife.py
+  script: gulimulife.app
   
 - url: /
-  script: gulimulife.py
+  script: gulimulife.app
 
 - url: /.*
-  script: not_found.py
+  script: not_found.app
+
+libraries:
+- name: django
+  version: "1.2"
   
 
   

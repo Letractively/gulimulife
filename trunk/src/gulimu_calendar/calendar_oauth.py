@@ -27,17 +27,17 @@ import gdata.alt
 import gdata.alt.appengine
 
 from appengine_utilities.sessions import Session
-from django.utils import simplejson
+import json as simplejson
 from google.appengine.api import users
 from google.appengine.ext.webapp.util import run_wsgi_app
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp import template
+import webapp2
 from google.appengine.api import urlfetch
+from django.template import loader as django_loader
 
 from utils import constants
 
 
-SETTINGS = {
+AUTH_SETTINGS = {
   'APP_NAME': 'gulimulife',
   'CONSUMER_KEY': 'gulimulife.appspot.com',
   'CONSUMER_SECRET': 'P7ujwzNKRof2HmLS2L+Zj2zk',
@@ -45,15 +45,18 @@ SETTINGS = {
   'SCOPES': 'https://www.google.com/calendar/feeds/',
   }
 
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+
 gcal = gdata.calendar.service.CalendarService()
 #gcal = gdata.service.GDataService();
-gcal.SetOAuthInputParameters(SETTINGS['SIG_METHOD'], SETTINGS['CONSUMER_KEY'],
-                              consumer_secret=SETTINGS['CONSUMER_SECRET'])
+gcal.SetOAuthInputParameters(AUTH_SETTINGS['SIG_METHOD'], AUTH_SETTINGS['CONSUMER_KEY'],
+                              consumer_secret=AUTH_SETTINGS['CONSUMER_SECRET'])
 gdata.alt.appengine.run_on_appengine(gcal)
 
 calendar_prefix = '/calendar'
 
-class MainPage(webapp.RequestHandler):
+class MainPage(webapp2.RequestHandler):
     title = 'MainPage'
 
     # GET /
@@ -62,7 +65,7 @@ class MainPage(webapp.RequestHandler):
         if not users.get_current_user():
             self.redirect(users.create_login_url(self.request.uri))
 
-        access_token = gcal.token_store.find_token(SETTINGS['SCOPES'])
+        access_token = gcal.token_store.find_token(AUTH_SETTINGS['SCOPES'])
         
         if isinstance(access_token, gdata.auth.OAuthToken):
             #feed = gcal.GetCalendarListFeed()
@@ -75,7 +78,7 @@ class MainPage(webapp.RequestHandler):
             form_value = 'Give this website access to my Google Calendars'
             revoke_token_link = None
   
-        converter_url = "\"" + calendar_prefix + '/currency_converter' + "\""
+        converter_url = '"' + calendar_prefix + '/currency_converter' + '"'
         template_values = {
             'form_action': form_action,
             'converter_url': converter_url,
@@ -87,10 +90,9 @@ class MainPage(webapp.RequestHandler):
             'sig_method': gcal.GetOAuthInputParameters().GetSignatureMethod().get_name()
         }
 
-        path = os.path.join(constants.Constants.TEMPLATE_PATH, 'calendar/calendar.html')
-        self.response.out.write(template.render(path, template_values))
+        self.response.out.write(django_loader.render_to_string("calendar/calendar.html", template_values))
 
-class OAuthDance(webapp.RequestHandler):
+class OAuthDance(webapp2.RequestHandler):
 
     """Handler for the 3 legged OAuth dance, v1.0a."""
 
@@ -134,7 +136,7 @@ class OAuthDance(webapp.RequestHandler):
             # 1.) REQUEST TOKEN STEP. Provide the data scope(s) and the page we'll
             # be redirected back to after the user grants access on the approval page.
             req_token = gcal.FetchOAuthRequestToken(
-                scopes=SETTINGS['SCOPES'], oauth_callback=self.request.uri)
+                scopes=AUTH_SETTINGS['SCOPES'], oauth_callback=self.request.uri)
 
             # When using HMAC, persist the token secret in order to re-create an
             # OAuthToken object coming back from the approval page.
@@ -275,7 +277,7 @@ class FetchCalendar(OAuthDance):
             self.response.out.write(simplejson.dumps(json))
             pass
 
-class CurrencyConverter(webapp.RequestHandler):
+class CurrencyConverter(webapp2.RequestHandler):
 
     # GET /currency_converter
     def get(self):
@@ -300,7 +302,7 @@ class CurrencyConverter(webapp.RequestHandler):
             self.response.out.write(400);
         
 
-class RevokeToken(webapp.RequestHandler):
+class RevokeToken(webapp2.RequestHandler):
 
     # GET /revoke_token
     def get(self):
@@ -314,17 +316,14 @@ class RevokeToken(webapp.RequestHandler):
         gcal.token_store.remove_all_tokens()
         self.redirect(calendar_prefix)
 
-class ErrorPage(webapp.RequestHandler):
+class ErrorPage(webapp2.RequestHandler):
     
     def get(self):
-        path = os.path.join(constants.Constants.TEMPLATE_PATH, '404.html');
-        
         template_dict = {
             "error_source": "Calendar"};
-        self.response.out.write(template.render(path, template_dict));
+        self.response.out.write(django_loader.render_to_string("404.html", template_dict));
 
-def main():
-    application = webapp.WSGIApplication([(calendar_prefix, MainPage),
+app = webapp2.WSGIApplication([(calendar_prefix, MainPage),
                                         (calendar_prefix + '/get_oauth_token', OAuthDance),
                                         (calendar_prefix + '/fetch_data', FetchData),
                                         (calendar_prefix + '/fetch_calendar', FetchCalendar),
@@ -332,7 +331,4 @@ def main():
                                         (calendar_prefix + '/currency_converter', CurrencyConverter),
                                         (calendar_prefix + '.*', ErrorPage)],
                                          debug=True)
-    run_wsgi_app(application)
 
-if __name__ == '__main__':
-    main()

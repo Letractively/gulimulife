@@ -10,3 +10,8 @@ if port and port != '80':
     HOST_NAME = '%s:%s' % (os.environ['SERVER_NAME'], port)
 else:
     HOST_NAME = os.environ['SERVER_NAME']
+
+ROOT_PATH = os.path.dirname(__file__)
+TEMPLATE_DIRS = (
+  ROOT_PATH + '/templates/',
+  )
