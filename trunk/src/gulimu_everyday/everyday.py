@@ -24,12 +24,12 @@ from utils import constants
 
 ##Globals
 AUTH_SETTINGS = {
-  'APP_NAME': 'gulimulife',
-  'CONSUMER_KEY': 'gulimulife.appspot.com',
-  'CONSUMER_SECRET': 'P7ujwzNKRof2HmLS2L+Zj2zk',
-  'SIG_METHOD': gdata.auth.OAuthSignatureMethod.HMAC_SHA1,
-  'SCOPES': ['https://www.google.com/calendar/feeds/'],
-  }
+    'APP_NAME': 'gulimulife-hr',
+    'CONSUMER_KEY': 'life.gulimujyujyu.me',
+    'CONSUMER_SECRET': 'NiKo8kYB7r-lUAAynbQWUUu7',
+    'SIG_METHOD': gdata.auth.OAuthSignatureMethod.HMAC_SHA1,
+    'SCOPES': 'https://www.google.com/calendar/feeds/',
+    }
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
@@ -43,7 +43,6 @@ class MainPage(webapp2.RequestHandler):
 
     # GET /
     def get(self):
-
         current_user = users.get_current_user()
         if not current_user:
             self.redirect(users.create_login_url(self.request.uri))
@@ -59,7 +58,7 @@ class MainPage(webapp2.RequestHandler):
             form_value = 'Now fetch my calendars!'
             revoke_token_link = True
         else:
-            action_list.append({'action_name':'Authorize','action_content':everyday_prefix+'/apply_oauth_token'})
+            action_list.append({'action_name': 'Authorize', 'action_content': everyday_prefix + '/apply_oauth_token'})
             form_action = everyday_prefix + '/get_oauth_token'
             form_value = 'Give this website access to my Google Calendars'
             revoke_token_link = None
@@ -75,7 +74,7 @@ class MainPage(webapp2.RequestHandler):
             'action_list': action_list,
             'revoke_token_link': revoke_token_link,
             'access_token': access_token,
-        }
+            }
 
         self.response.out.write(django_loader.render_to_string('everyday/everyday.html', template_values))
 
@@ -96,7 +95,7 @@ class OAuthApply(webapp2.RequestHandler):
             #logging.info(callback_url)
             req_token = gcal.GetOAuthToken(
                 scopes=AUTH_SETTINGS['SCOPES'], next=callback_url, consumer_key=AUTH_SETTINGS['CONSUMER_KEY'],
-                consumer_secret = AUTH_SETTINGS['CONSUMER_SECRET'])
+                consumer_secret=AUTH_SETTINGS['CONSUMER_SECRET'])
 
             # When using HMAC, persist the token secret in order to re-create an
             # OAuthToken object coming back from the approval page.
@@ -119,7 +118,6 @@ class OAuthApply(webapp2.RequestHandler):
 
 #OAuth Handler Class
 class OAuthFinish(webapp2.RequestHandler):
-
     """Handler for the 3 legged OAuth dance, v1.0a."""
 
     """This handler is responsible for fetching an initial OAuth request token,
@@ -143,16 +141,15 @@ class OAuthFinish(webapp2.RequestHandler):
 
 #404 page
 class ErrorPage(webapp2.RequestHandler):
-
     def get(self):
         template_dict = {
             "error_source": "Everyday"};
-        self.response.out.write(django_loader.render_to_string('404.html',template_dict));
+        self.response.out.write(django_loader.render_to_string('404.html', template_dict));
 
 #manage links
 app = webapp2.WSGIApplication([(everyday_prefix, MainPage),
-                                          (everyday_prefix + '/apply_oauth_token', OAuthApply),
-                                          (everyday_prefix + '/get_oauth_token', OAuthFinish),
-                                          (everyday_prefix + '.*', ErrorPage)],
-                                         debug=True)
+    (everyday_prefix + '/apply_oauth_token', OAuthApply),
+    (everyday_prefix + '/get_oauth_token', OAuthFinish),
+    (everyday_prefix + '.*', ErrorPage)],
+                                        debug=True)
 

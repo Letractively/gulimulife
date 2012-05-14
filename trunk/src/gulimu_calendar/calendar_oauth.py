@@ -38,20 +38,21 @@ from utils import constants
 
 
 AUTH_SETTINGS = {
-  'APP_NAME': 'gulimulife',
-  'CONSUMER_KEY': 'gulimulife.appspot.com',
-  'CONSUMER_SECRET': 'P7ujwzNKRof2HmLS2L+Zj2zk',
-  'SIG_METHOD': gdata.auth.OAuthSignatureMethod.HMAC_SHA1,
-  'SCOPES': 'https://www.google.com/calendar/feeds/',
-  }
+    'APP_NAME': 'gulimulife-hr',
+    'CONSUMER_KEY': 'life.gulimujyujyu.me',
+    'CONSUMER_SECRET': 'NiKo8kYB7r-lUAAynbQWUUu7',
+    'SIG_METHOD': gdata.auth.OAuthSignatureMethod.HMAC_SHA1,
+    'SCOPES': 'https://www.google.com/calendar/feeds/',
+    }
 
 import os
+
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
 gcal = gdata.calendar.service.CalendarService()
 #gcal = gdata.service.GDataService();
 gcal.SetOAuthInputParameters(AUTH_SETTINGS['SIG_METHOD'], AUTH_SETTINGS['CONSUMER_KEY'],
-                              consumer_secret=AUTH_SETTINGS['CONSUMER_SECRET'])
+                             consumer_secret=AUTH_SETTINGS['CONSUMER_SECRET'])
 gdata.alt.appengine.run_on_appengine(gcal)
 
 calendar_prefix = '/calendar'
@@ -61,15 +62,14 @@ class MainPage(webapp2.RequestHandler):
 
     # GET /
     def get(self):
-        
         if not users.get_current_user():
             self.redirect(users.create_login_url(self.request.uri))
 
         access_token = gcal.token_store.find_token(AUTH_SETTINGS['SCOPES'])
-        
+
         if isinstance(access_token, gdata.auth.OAuthToken):
             #feed = gcal.GetCalendarListFeed()
-            
+
             form_action = calendar_prefix + '/fetch_data'
             form_value = 'Now fetch my calendars!'
             revoke_token_link = True
@@ -77,7 +77,7 @@ class MainPage(webapp2.RequestHandler):
             form_action = calendar_prefix + '/get_oauth_token'
             form_value = 'Give this website access to my Google Calendars'
             revoke_token_link = None
-  
+
         converter_url = '"' + calendar_prefix + '/currency_converter' + '"'
         template_values = {
             'form_action': form_action,
@@ -92,8 +92,8 @@ class MainPage(webapp2.RequestHandler):
 
         self.response.out.write(django_loader.render_to_string("calendar/calendar.html", template_values))
 
-class OAuthDance(webapp2.RequestHandler):
 
+class OAuthDance(webapp2.RequestHandler):
     """Handler for the 3 legged OAuth dance, v1.0a."""
 
     """This handler is responsible for fetching an initial OAuth request token,
@@ -213,7 +213,7 @@ class FetchData(OAuthDance):
                 json = {'title': response.title.text}
             #    json = [{"state":"Entry Format"}];
             else:
-                json = {"state":"Unknown Format"}
+                json = {"state": "Unknown Format"}
 
                 #feed = gcal.GetCalendarListFeed()
 
@@ -226,6 +226,7 @@ class FetchData(OAuthDance):
             self.response.out.write(simplejson.dumps(json))
             pass
             #OAuthDance.post(self)
+
 
 class FetchCalendar(OAuthDance):
     """Fetches the user's calendar."""
@@ -241,13 +242,13 @@ class FetchCalendar(OAuthDance):
     # POST /fetch_data
     def post(self):
         """Fetches the user's data."""
-         
+
         feed_url = constants.Constants.CAL_FEED_ALL_CALENDARS;
         #feed_url = 'https://www.google.com/calendar/feeds/default/owncalendars/full/'
         #feed_url = 'https://www.google.com/calendar/feeds/15k5jcgdnscdj9j5lposl32hms%40group.calendar.google.com/private/full'
         try:
             json = [];
-            
+
             response = gcal.Get(feed_url)
             # for xml
             #response = gcal.Get(feed_url, converter=str)            
@@ -255,55 +256,54 @@ class FetchCalendar(OAuthDance):
             if isinstance(response, atom.Feed):
                 for entry in response.entry:
                     json.append({'title': entry.title.text,
-                                'id': entry.id.text,
-                                'published': entry.published.text,
-                                'updated': entry.updated.text,
-                                })
+                                 'id': entry.id.text,
+                                 'published': entry.published.text,
+                                 'updated': entry.updated.text,
+                                 })
             #    json = [{"state":"Feed Format"}];
             elif isinstance(response, atom.Entry):
                 json.append({'title': response.title.text})
             #    json = [{"state":"Entry Format"}];
             else:
-                json = [{"state":"Unknown Format"}];
-            
-            #feed = gcal.GetCalendarListFeed()
-            
-            #for entry in feed.entry:
+                json = [{"state": "Unknown Format"}];
+
+                #feed = gcal.GetCalendarListFeed()
+
+                #for entry in feed.entry:
                 #json.append({'title': entry.title.text,
                 #    })
             self.response.out.write(simplejson.dumps(json))
         except gdata.service.RequestError, error:
-            json = [{"state":error}];
+            json = [{"state": error}];
             self.response.out.write(simplejson.dumps(json))
             pass
 
-class CurrencyConverter(webapp2.RequestHandler):
 
+class CurrencyConverter(webapp2.RequestHandler):
     # GET /currency_converter
     def get(self):
         self.post()
         #self.redirect(calendar_prefix)
-    
+
     # POST /currency_converter
     def post(self):
         amount = self.request.get('amount', default_value=1);
         fromCur = self.request.get('fromCur', default_value=constants.Constants.CAL_FROM_CUR);
         toCur = self.request.get('toCur', default_value=constants.Constants.CAL_TO_CUR);
-        
-        convertURL = constants.Constants.CURRENCY_URL + '?hl=en&q=' + str(amount) + fromCur \
-                        + '=?' + toCur; 
+
+        convertURL = constants.Constants.CURRENCY_URL + '?hl=en&q=' + str(amount) + fromCur\
+                     + '=?' + toCur;
         response = urlfetch.fetch(convertURL)
         regexp1 = re.compile(r"[\w,.:]")
         result = regexp1.findall(response.content);
-        
+
         if response.status_code == 200:
             self.response.out.write("".join(result));
         else:
             self.response.out.write(400);
-        
+
 
 class RevokeToken(webapp2.RequestHandler):
-
     # GET /revoke_token
     def get(self):
         """Revokes the current user's OAuth access token."""
@@ -316,19 +316,19 @@ class RevokeToken(webapp2.RequestHandler):
         gcal.token_store.remove_all_tokens()
         self.redirect(calendar_prefix)
 
+
 class ErrorPage(webapp2.RequestHandler):
-    
     def get(self):
         template_dict = {
             "error_source": "Calendar"};
         self.response.out.write(django_loader.render_to_string("404.html", template_dict));
 
 app = webapp2.WSGIApplication([(calendar_prefix, MainPage),
-                                        (calendar_prefix + '/get_oauth_token', OAuthDance),
-                                        (calendar_prefix + '/fetch_data', FetchData),
-                                        (calendar_prefix + '/fetch_calendar', FetchCalendar),
-                                        (calendar_prefix + '/revoke_token', RevokeToken),
-                                        (calendar_prefix + '/currency_converter', CurrencyConverter),
-                                        (calendar_prefix + '.*', ErrorPage)],
-                                         debug=True)
+    (calendar_prefix + '/get_oauth_token', OAuthDance),
+    (calendar_prefix + '/fetch_data', FetchData),
+    (calendar_prefix + '/fetch_calendar', FetchCalendar),
+    (calendar_prefix + '/revoke_token', RevokeToken),
+    (calendar_prefix + '/currency_converter', CurrencyConverter),
+    (calendar_prefix + '.*', ErrorPage)],
+                                        debug=True)
 
