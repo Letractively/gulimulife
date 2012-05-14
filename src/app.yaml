@@ -1,5 +1,5 @@
-application: gulimulife
-version: 8
+application: gulimulife-hr
+version: 1
 runtime: python27
 api_version: 1
 threadsafe: true
@@ -33,6 +33,10 @@ handlers:
   
 - url: /
   script: gulimulife.app
+
+- url: /(google7c2892bc8e0b7d79\.html)
+  static_files: static/misc/\1
+  upload: static/misc/(google7c2892bc8e0b7d79\.html)
 
 - url: /.*
   script: not_found.app

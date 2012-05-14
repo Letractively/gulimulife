@@ -2,29 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="37bbb182-19d2-42ba-a27f-cac6588e586f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gulimu_soc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/sundayofcode" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/templates/sundayofcode" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gulimu_soc/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gulimu_soc/soc.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/css/404.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/templates/sundayofcode/sundayofcode.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/static/misc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gulimulife.iml" afterPath="$PROJECT_DIR$/.idea/gulimulife.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Google_App_Engine_SDK.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Google_App_Engine_SDK.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/README.md" afterPath="$PROJECT_DIR$/src/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app.yaml" afterPath="$PROJECT_DIR$/src/app.yaml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/appengine_utilities/sessions.py" afterPath="$PROJECT_DIR$/src/appengine_utilities/sessions.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gulimu_calendar/calendar_oauth.py" afterPath="$PROJECT_DIR$/src/gulimu_calendar/calendar_oauth.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gulimu_everyday/everyday.py" afterPath="$PROJECT_DIR$/src/gulimu_everyday/everyday.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gulimu_tenthousand/tenthousand.py" afterPath="$PROJECT_DIR$/src/gulimu_tenthousand/tenthousand.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gulimu_travelmap/travelmap.py" afterPath="$PROJECT_DIR$/src/gulimu_travelmap/travelmap.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gulimulife.py" afterPath="$PROJECT_DIR$/src/gulimulife.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/not_found.py" afterPath="$PROJECT_DIR$/src/not_found.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/settings.py" afterPath="$PROJECT_DIR$/src/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/templates/404.html" afterPath="$PROJECT_DIR$/src/templates/404.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/templates/calendar/calendar.html" afterPath="$PROJECT_DIR$/src/templates/calendar/calendar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/templates/everyday/everyday.html" afterPath="$PROJECT_DIR$/src/templates/everyday/everyday.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/templates/index.html" afterPath="$PROJECT_DIR$/src/templates/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/templates/tenthousand/tenthousand.html" afterPath="$PROJECT_DIR$/src/templates/tenthousand/tenthousand.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/templates/travelmap/travelmap.html" afterPath="$PROJECT_DIR$/src/templates/travelmap/travelmap.html" />
+      <change type="MOVED" beforePath="F:\Gulimujyujyu\gulimulife\src\google7c2892bc8e0b7d79.html" afterPath="$PROJECT_DIR$/src/static/misc/google7c2892bc8e0b7d79.html" />
     </list>
     <ignored path="gulimulife.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,100 +33,94 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="tenthousand.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gulimu_tenthousand/tenthousand.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="236" column="32" selection-start="8336" selection-end="8336" vertical-scroll-proportion="-0.8607595">
-              <folding>
-                <element signature="e#72#81#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="travelmap.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/gulimu_travelmap/travelmap.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="90" column="50" selection-start="2528" selection-end="2528" vertical-scroll-proportion="0.33333334">
-              <folding>
-                <element signature="e#75#85#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="404.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/templates/404.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="17" selection-start="295" selection-end="295" vertical-scroll-proportion="-7.90625">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="everyday.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/templates/everyday/everyday.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="44" selection-start="430" selection-end="430" vertical-scroll-proportion="21.5625">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/templates/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="23" selection-start="1453" selection-end="1453" vertical-scroll-proportion="-7.84375">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="soc.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gulimu_soc/soc.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="72" selection-start="559" selection-end="559" vertical-scroll-proportion="-10.12">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sundayofcode.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/templates/sundayofcode/sundayofcode.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="19" selection-start="222" selection-end="222" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="calendar.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/templates/calendar/calendar.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="490" column="38" selection-start="16484" selection-end="16484" vertical-scroll-proportion="-2.4237287">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="calendar_oauth.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gulimu_calendar/calendar_oauth.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="225" column="52" selection-start="8924" selection-end="8941" vertical-scroll-proportion="-2.3164556">
-              <folding>
-                <element signature="e#337#347#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="everyday.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gulimu_everyday/everyday.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="9" selection-start="408" selection-end="416" vertical-scroll-proportion="-17.48">
+            <state line="30" column="55" selection-start="665" selection-end="665" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="23" selection-start="313" selection-end="313" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gulimulife.log" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gulimulife.log">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="model.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="not_found.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/not_found.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.yaml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="38" column="52" selection-start="733" selection-end="733" vertical-scroll-proportion="1.2097378">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gulimulife.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gulimulife.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#95#104#0" expanded="true" />
+                <element signature="e#0#14#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.yaml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/index.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="travelmap.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gulimu_travelmap/travelmap.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="28" selection-start="552" selection-end="552" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -154,12 +135,9 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/appengine_utilities/sessions.py" />
         <option value="$PROJECT_DIR$/src/settings.py" />
-        <option value="$PROJECT_DIR$/src/app.yaml" />
         <option value="$PROJECT_DIR$/src/templates/tenthousand/tenthousand.html" />
         <option value="$PROJECT_DIR$/src/templates/travelmap/travelmap.html" />
-        <option value="$PROJECT_DIR$/src/gulimu_everyday/everyday.py" />
         <option value="$PROJECT_DIR$/src/static/css/404.css" />
         <option value="$PROJECT_DIR$/src/templates/404.html" />
         <option value="$PROJECT_DIR$/src/templates/everyday/everyday.html" />
@@ -167,17 +145,20 @@
         <option value="$PROJECT_DIR$/src/gulimu_soc/soc.py" />
         <option value="$PROJECT_DIR$/src/templates/sundayofcode/sundayofcode.html" />
         <option value="$PROJECT_DIR$/src/templates/calendar/calendar.html" />
-        <option value="$PROJECT_DIR$/src/gulimu_calendar/calendar_oauth.py" />
         <option value="$PROJECT_DIR$/src/gulimu_tenthousand/tenthousand.py" />
         <option value="$PROJECT_DIR$/src/gulimu_travelmap/travelmap.py" />
+        <option value="$PROJECT_DIR$/src/app.yaml" />
+        <option value="$PROJECT_DIR$/src/gulimu_calendar/calendar_oauth.py" />
+        <option value="$PROJECT_DIR$/src/gulimu_everyday/everyday.py" />
+        <option value="$PROJECT_DIR$/src/README.md" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="57" />
-    <option name="y" value="-2" />
-    <option name="width" value="1544" />
-    <option name="height" value="916" />
+    <option name="x" value="65" />
+    <option name="y" value="-9" />
+    <option name="width" value="1624" />
+    <option name="height" value="1068" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -236,6 +217,16 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -268,132 +259,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sundayofcode" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="calendar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimu_travelmap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimulife" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gulimu_tenthousand" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Favorites" />
@@ -402,11 +267,11 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="application.passwordSafe" />
     <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="com.jetbrains.appengine.AppEngineModulesConfigurable" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -425,6 +290,7 @@
       <recent name="$PROJECT_DIR$/src/gulimu_trevalmap" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Gulimujyujyu\gulimulife\src\static\misc" />
       <recent name="E:\Gulimujyujyu\gulimulife\src\static\css" />
     </key>
   </component>
@@ -539,7 +405,7 @@
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
     <option name="FORCE_UPDATE" value="false" />
-    <configuration useDefault="true">C:\Users\xlzhu\AppData\Roaming\Subversion</configuration>
+    <configuration useDefault="true">C:\Users\Administrator\AppData\Roaming\Subversion</configuration>
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
     <supportedVersion>125</supportedVersion>
   </component>
@@ -547,16 +413,16 @@
     <option name="myMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="E:\Gulimujyujyu\gulimulife" />
-          <option name="myCopyRoot" value="E:\Gulimujyujyu\gulimulife" />
+          <option name="myVcsRoot" value="F:\Gulimujyujyu\gulimulife" />
+          <option name="myCopyRoot" value="F:\Gulimujyujyu\gulimulife" />
         </SvnCopyRootSimple>
       </list>
     </option>
     <option name="myMoreRealMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="E:\Gulimujyujyu\gulimulife" />
-          <option name="myCopyRoot" value="E:\Gulimujyujyu\gulimulife" />
+          <option name="myVcsRoot" value="F:\Gulimujyujyu\gulimulife" />
+          <option name="myCopyRoot" value="F:\Gulimujyujyu\gulimulife" />
         </SvnCopyRootSimple>
       </list>
     </option>
@@ -599,23 +465,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="57" y="-2" width="1544" height="916" extended-state="0" />
+    <frame x="65" y="-9" width="1624" height="1068" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42684564" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270525" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3443843" sideWeight="0.65006727" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34935898" sideWeight="0.65139663" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39966556" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3499327" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34860334" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270525" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3261745" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -657,14 +523,14 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
-    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="upgrade to python27 runtime for threadsafe" />
+    <option name="LAST_COMMIT_MESSAGE" value="Take place of gulimulife.appspot.com. Now it is life.gulimujyujyu.me" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
-    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
     <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
     <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
@@ -679,6 +545,7 @@
     <MESSAGE value="update the interface" />
     <MESSAGE value="update the interface, in accordance with gulimujyujyu.me" />
     <MESSAGE value="upgrade to python27 runtime for threadsafe" />
+    <MESSAGE value="Take place of gulimulife.appspot.com. Now it is life.gulimujyujyu.me" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -695,123 +562,117 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/utils/constants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="16" selection-start="138" selection-end="138" vertical-scroll-proportion="-3.68">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gulimulife.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="34" selection-start="526" selection-end="526" vertical-scroll-proportion="2.76">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="25" selection-start="305" selection-end="314" vertical-scroll-proportion="0.6334107">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/templates/tenthousand/tenthousand.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="12" selection-start="12" selection-end="12" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/templates/travelmap/travelmap.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="12" selection-start="12" selection-end="12" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/static/css/404.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="30" selection-start="43" selection-end="43" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/templates/everyday/everyday.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="44" selection-start="430" selection-end="430" vertical-scroll-proportion="21.5625">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/templates/404.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="17" selection-start="295" selection-end="295" vertical-scroll-proportion="-7.90625">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="23" selection-start="1453" selection-end="1453" vertical-scroll-proportion="-7.84375">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/templates/sundayofcode/sundayofcode.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="19" selection-start="222" selection-end="222" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/templates/calendar/calendar.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="490" column="38" selection-start="16484" selection-end="16484" vertical-scroll-proportion="-2.4237287">
+        <state line="490" column="38" selection-start="16484" selection-end="16484" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/static/misc/google7c2892bc8e0b7d79.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gulimu_calendar/calendar_oauth.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="225" column="52" selection-start="8924" selection-end="8941" vertical-scroll-proportion="-2.3164556">
-          <folding>
-            <element signature="e#337#347#0" expanded="true" />
-          </folding>
+        <state line="40" column="0" selection-start="849" selection-end="1083" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gulimu_everyday/everyday.py">
+    <entry file="file://$PROJECT_DIR$/src/gulimu_skillchart/skillchart.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="9" selection-start="408" selection-end="416" vertical-scroll-proportion="-17.48">
-          <folding>
-            <element signature="e#95#104#0" expanded="true" />
-          </folding>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gulimu_soc/soc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="72" selection-start="559" selection-end="559" vertical-scroll-proportion="-10.12">
+        <state line="23" column="72" selection-start="559" selection-end="559" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gulimu_tenthousand/tenthousand.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="236" column="32" selection-start="8336" selection-end="8336" vertical-scroll-proportion="-0.8607595">
-          <folding>
-            <element signature="e#72#81#0" expanded="true" />
-          </folding>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gulimu_travelmap/travelmap.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="50" selection-start="2528" selection-end="2528" vertical-scroll-proportion="0.33333334">
+        <state line="30" column="28" selection-start="552" selection-end="552" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gulimu_everyday/everyday.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="55" selection-start="665" selection-end="665" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="23" selection-start="313" selection-end="313" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gulimulife.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#75#85#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gulimulife.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/not_found.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="52" selection-start="733" selection-end="733" vertical-scroll-proportion="1.2097378">
+          <folding />
         </state>
       </provider>
     </entry>
