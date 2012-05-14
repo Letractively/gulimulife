@@ -1,85 +1,87 @@
 <html>
 <head>
-  <meta name="google-site-verification" content="T4-1d9qZ7zwB0NGA33op1EwDl6tp6b13Hk9E_8eEkSg"/>
-  <title>{% block title %}Gulimujyujyu's Life{% endblock %}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta name="google-site-verification" content="T4-1d9qZ7zwB0NGA33op1EwDl6tp6b13Hk9E_8eEkSg"/>
+    <title>{% block title %}Gulimujyujyu's Life{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-{% block default_css_include %}
-  <link href="/static/css/main.css" rel="stylesheet">
-  <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/static/css/boostrap-reponsive.min.css" rel="stylesheet">
-{% endblock %}
+    {% block default_css_include %}
+        <link href="/static/css/main.css" rel="stylesheet">
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+    {% endblock %}
 
-{% block more_css_include %}
-{% endblock %}
+    {% block more_css_include %}
+    {% endblock %}
 
-{% block default_js_include %}
-{% endblock %}
+    {% block default_js_include %}
+    {% endblock %}
 
-{% block more_js_include %}
-  <script src="/static/js/jquery.js"></script>
+    {% block more_js_include %}
+        <script src="/static/js/jquery.js"></script>
 
-  <script src="/static/js/bootstrap-transition.js"></script>
-  <script src="/static/js/bootstrap-alert.js"></script>
-  <script src="/static/js/bootstrap-modal.js"></script>
-  <script src="/static/js/bootstrap-dropdown.js"></script>
-  <script src="/static/js/bootstrap-tooltip.js"></script>
-  <script src="/static/js/bootstrap-popover.js"></script>
-  <script src="/static/js/bootstrap-button.js"></script>
-  <script src="/static/js/bootstrap-collapse.js"></script>
+        <script src="/static/js/bootstrap-transition.js"></script>
+        <script src="/static/js/bootstrap-alert.js"></script>
+        <script src="/static/js/bootstrap-modal.js"></script>
+        <script src="/static/js/bootstrap-dropdown.js"></script>
+        <script src="/static/js/bootstrap-tooltip.js"></script>
+        <script src="/static/js/bootstrap-popover.js"></script>
+        <script src="/static/js/bootstrap-button.js"></script>
+        <script src="/static/js/bootstrap-collapse.js"></script>
 
-  <script>
-    $(document).ready(function(){
-      $('ul.porfolio li a.thumbnail').popover()
-    });
-  </script>
-{% endblock %}
+        <script>
+            $(document).ready(function () {
+                $('ul.porfolio li a.thumbnail').popover()
+            });
+        </script>
+    {% endblock %}
 
 
 </head>
 
 <body{% block body_on_load %}{% endblock %}>
 {% block navbar %}
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a class="brand" href="#">
-        <img class="site-box-shadow site-mini-logo" src="/static/img/gulimujyujyu-logo-28x28.png" alt="logo">
-        {% block logo_name %} GulimuLife {% endblock %}
-      </a>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="#">
+                    <img class="site-box-shadow site-mini-logo" src="/static/img/gulimujyujyu-logo-28x28.png"
+                         alt="logo">
+                    {% block logo_name %} GulimuLife {% endblock %}
+                </a>
 
-      <div class="nav-collapse">
-        <ul class="nav">
-          <li {% block nav_home_class %}class="active"{% endblock %}><a href="/"><i class="icon-home icon-white"></i>Home</a></li>
-        </ul>
-      </div>
-      <!--/.nav-collapse -->
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        <li {% block nav_home_class %}class="active"{% endblock %}><a href="/"><i
+                                class="icon-home icon-white"></i>Home</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
 
-      <div class="nav-collapse">
-        {% if user %}
-        <ul class="nav pull-right">
-          <li><p class="navbar-text">Welcome! {{user}}. </p></li>
-          {% block revert_token %}{% endblock %}
-          <li><a href={{user_url}}><i class="icon-off icon-white"></i>Logout</a></li>
-        </ul>
-        {% else %}
-        <ul class="nav pull-right">
-          <li><a href={{user_url}}>Sign in</a></li>
-        </ul>
-        {% endif %}
+                <div class="nav-collapse">
+                    {% if user %}
+                        <ul class="nav pull-right">
+                            <li><p class="navbar-text">Welcome! {{ user }}. </p></li>
+                            {% block revert_token %}{% endblock %}
+                            <li><a href={{ user_url }}><i class="icon-off icon-white"></i>Logout</a></li>
+                        </ul>
+                    {% else %}
+                        <ul class="nav pull-right">
+                            <li><a href={{ user_url }}>Sign in</a></li>
+                        </ul>
+                    {% endif %}
 
-      </div>
-      <!-- /.nav-collapse-->
+                </div>
+                <!-- /.nav-collapse-->
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 {% endblock %}
 
 {% block body %}

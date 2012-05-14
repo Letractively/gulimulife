@@ -26,7 +26,7 @@ import gdata.calendar.service
 import gdata.alt
 import gdata.alt.appengine
 
-from appengine_utilities.sessions import Session
+from appengine_utilities.gmemsess import Session
 import json as simplejson
 from google.appengine.api import users
 from google.appengine.ext.webapp.util import run_wsgi_app
@@ -52,7 +52,7 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 gcal = gdata.calendar.service.CalendarService()
 #gcal = gdata.service.GDataService();
 gcal.SetOAuthInputParameters(AUTH_SETTINGS['SIG_METHOD'], AUTH_SETTINGS['CONSUMER_KEY'],
-                             consumer_secret=AUTH_SETTINGS['CONSUMER_SECRET'])
+    consumer_secret=AUTH_SETTINGS['CONSUMER_SECRET'])
 gdata.alt.appengine.run_on_appengine(gcal)
 
 calendar_prefix = '/calendar'
@@ -105,10 +105,16 @@ class OAuthDance(webapp2.RequestHandler):
     def get(self):
         """Invoked after we're redirected back from the approval page."""
 
-        self.session = Session()
+        self.session = Session(self)
+        #logging.warning(self.session.cookie.output())
+
         oauth_token = gdata.auth.OAuthTokenFromUrl(self.request.uri)
         if oauth_token:
+            #logging.warning(oauth_token)
+            #logging.warning(self.session.__str__())
+            #logging.warning(self.session.cookie.output())
             oauth_token.secret = self.session['oauth_token_secret']
+            #logging.warning(self.session['oauth_token_secret'])
             oauth_token.oauth_input_params = gcal.GetOAuthInputParameters()
             gcal.SetOAuthToken(oauth_token)
 
@@ -130,7 +136,8 @@ class OAuthDance(webapp2.RequestHandler):
     def post(self):
         """Fetches a request token and redirects the user to the approval page."""
 
-        self.session = Session()
+        self.session = Session(self)
+        #logging.warning(self.session.cookie.output())
 
         if users.get_current_user():
             # 1.) REQUEST TOKEN STEP. Provide the data scope(s) and the page we'll
@@ -140,7 +147,12 @@ class OAuthDance(webapp2.RequestHandler):
 
             # When using HMAC, persist the token secret in order to re-create an
             # OAuthToken object coming back from the approval page.
+            #logging.warning(req_token.secret)
             self.session['oauth_token_secret'] = req_token.secret
+            self.session.save()
+            #logging.warning(self.session['oauth_token_secret'])
+            #logging.warning(self.session.keys())
+            #logging.warning(self.session.cookie.output())
 
             # Generate the URL to redirect the user to.  Add the hd paramter for a
             # better user experience.  Leaving it off will give the user the choice
@@ -183,7 +195,7 @@ class FetchData(OAuthDance):
             json = [];
 
             response = gcal.Get(feed_url)
-            #logging.warning("INFO:\t\t\tEntry:" + str(response))
+            ##logging.warning("INFO:\t\t\tEntry:" + str(response))
             # for xml
             #response = gcal.Get(feed_url, converter=str)
             #self.response.out.write(response)javascript:;
@@ -330,5 +342,5 @@ app = webapp2.WSGIApplication([(calendar_prefix, MainPage),
     (calendar_prefix + '/revoke_token', RevokeToken),
     (calendar_prefix + '/currency_converter', CurrencyConverter),
     (calendar_prefix + '.*', ErrorPage)],
-                                        debug=True)
+    debug=True)
 
