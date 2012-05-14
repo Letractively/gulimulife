@@ -42,7 +42,7 @@ from time import strftime
 from google.appengine.ext import db
 from google.appengine.api import memcache
 
-import json
+from django.utils import simplejson
 
 # settings
 try:
@@ -53,8 +53,6 @@ try:
         settings = settings_default
 except:
     settings = settings_default
-
-
 
 
 class _AppEngineUtilities_Session(db.Model):
@@ -69,7 +67,7 @@ class _AppEngineUtilities_Session(db.Model):
     last_activity = db.DateTimeProperty()
     dirty = db.BooleanProperty(default=False)
     working = db.BooleanProperty(default=False)
-    deleted = db.BooleanProperty(default=False) 
+    deleted = db.BooleanProperty(default=False)
 
     def put(self):
         """
@@ -79,8 +77,8 @@ class _AppEngineUtilities_Session(db.Model):
         Returns the session object.
         """
         try:
-            memcache.set(u"_AppEngineUtilities_Session_%s" % \
-                (str(self.key())), self)
+            memcache.set(u"_AppEngineUtilities_Session_%s" %\
+                         (str(self.key())), self)
         except:
             # new session, generate a new key, which will handle the
             # put and set the memcache
@@ -91,12 +89,12 @@ class _AppEngineUtilities_Session(db.Model):
         try:
             self.dirty = False
             db.put(self)
-            memcache.set(u"_AppEngineUtilities_Session_%s" % \
-                (str(self.key())), self)
+            memcache.set(u"_AppEngineUtilities_Session_%s" %\
+                         (str(self.key())), self)
         except:
             self.dirty = True
-            memcache.set(u"_AppEngineUtilities_Session_%s" % \
-                (str(self.key())), self)
+            memcache.set(u"_AppEngineUtilities_Session_%s" %\
+                         (str(self.key())), self)
 
         return self
 
@@ -114,8 +112,8 @@ class _AppEngineUtilities_Session(db.Model):
         if session_obj.sid == None:
             return None
         session_key = session_obj.sid.split(u'_')[0]
-        session = memcache.get(u"_AppEngineUtilities_Session_%s" % \
-            (str(session_key)))
+        session = memcache.get(u"_AppEngineUtilities_Session_%s" %\
+                               (str(session_key)))
         if session:
             if session.deleted == True:
                 session.delete()
@@ -125,8 +123,8 @@ class _AppEngineUtilities_Session(db.Model):
                 # which can happen with ajax oriented sites, don't try to put
                 # at the same time
                 session.working = True
-                memcache.set(u"_AppEngineUtilities_Session_%s" % \
-                    (str(session_key)), session)
+                memcache.set(u"_AppEngineUtilities_Session_%s" %\
+                             (str(session_key)), session)
                 session.put()
             if session_obj.sid in session.sid:
                 sessionAge = datetime.datetime.now() - session.last_activity
@@ -136,19 +134,19 @@ class _AppEngineUtilities_Session(db.Model):
                 return session
             else:
                 return None
- 
+
         # Not in memcache, check datastore
-        
+
         ds_session = db.get(str(session_key))
         if ds_session:
-          sessionAge = datetime.datetime.now() - ds_session.last_activity
-          if sessionAge.seconds > session_obj.session_expire_time:
-              ds_session.delete()
-              return None
-          memcache.set(u"_AppEngineUtilities_Session_%s" % \
-              (str(session_key)), ds_session)
-          memcache.set(u"_AppEngineUtilities_SessionData_%s" % \
-              (str(session_key)), ds_session.get_items_ds())
+            sessionAge = datetime.datetime.now() - ds_session.last_activity
+            if sessionAge.seconds > session_obj.session_expire_time:
+                ds_session.delete()
+                return None
+            memcache.set(u"_AppEngineUtilities_Session_%s" %\
+                         (str(session_key)), ds_session)
+            memcache.set(u"_AppEngineUtilities_SessionData_%s" %\
+                         (str(session_key)), ds_session.get_items_ds())
         return ds_session
 
 
@@ -157,8 +155,8 @@ class _AppEngineUtilities_Session(db.Model):
         Returns all the items stored in a session. Queries memcache first
         and will try the datastore next.
         """
-        items = memcache.get(u"_AppEngineUtilities_SessionData_%s" % \
-            (str(self.key())))
+        items = memcache.get(u"_AppEngineUtilities_SessionData_%s" %\
+                             (str(self.key())))
         if items:
             for item in items:
                 if item.deleted == True:
@@ -171,7 +169,7 @@ class _AppEngineUtilities_Session(db.Model):
         results = query.fetch(1000)
         return results
 
-    def get_item(self, keyname = None):
+    def get_item(self, keyname=None):
         """
         Returns a single session data item from the memcache or datastore
 
@@ -180,8 +178,8 @@ class _AppEngineUtilities_Session(db.Model):
 
         Returns the session data object if it exists, otherwise returns None
         """
-        mc = memcache.get(u"_AppEngineUtilities_SessionData_%s" % \
-            (str(self.key())))
+        mc = memcache.get(u"_AppEngineUtilities_SessionData_%s" %\
+                          (str(self.key())))
         if mc:
             for item in mc:
                 if item.keyname == keyname:
@@ -194,8 +192,8 @@ class _AppEngineUtilities_Session(db.Model):
         query.filter(u"keyname = ", keyname)
         results = query.fetch(1)
         if len(results) > 0:
-            memcache.set(u"_AppEngineUtilities_SessionData_%s" % \
-                (str(self.key())), self.get_items_ds())
+            memcache.set(u"_AppEngineUtilities_SessionData_%s" %\
+                         (str(self.key())), self.get_items_ds())
             return results[0]
         return None
 
@@ -224,13 +222,13 @@ class _AppEngineUtilities_Session(db.Model):
             results = query.fetch(1000)
             db.delete(results)
             db.delete(self)
-            memcache.delete_multi([u"_AppEngineUtilities_Session_%s" % \
-                (str(self.key())), \
-                u"_AppEngineUtilities_SessionData_%s" % \
-                (str(self.key()))])
+            memcache.delete_multi([u"_AppEngineUtilities_Session_%s" %\
+                                   (str(self.key())),\
+                                   u"_AppEngineUtilities_SessionData_%s" %\
+                                   (str(self.key()))])
         except:
-            mc = memcache.get(u"_AppEngineUtilities_Session_%s" %+ \
-                (str(self.key())))
+            mc = memcache.get(u"_AppEngineUtilities_Session_%s" % +\
+            (str(self.key())))
             if mc:
                 mc.deleted = True
             else:
@@ -240,10 +238,11 @@ class _AppEngineUtilities_Session(db.Model):
                 results = query.fetch(1)
                 if len(results) > 0:
                     results[0].deleted = True
-                    memcache.set(u"_AppEngineUtilities_Session_%s" % \
-                        (unicode(self.key())), results[0])
+                    memcache.set(u"_AppEngineUtilities_Session_%s" %\
+                                 (unicode(self.key())), results[0])
         return True
-            
+
+
 class _AppEngineUtilities_SessionData(db.Model):
     """
     Model for the session data in the datastore.
@@ -272,8 +271,8 @@ class _AppEngineUtilities_SessionData(db.Model):
             self.dirty = True
 
         # update or insert in memcache
-        mc_items = memcache.get(u"_AppEngineUtilities_SessionData_%s" % \
-            (str(self.session.key())))
+        mc_items = memcache.get(u"_AppEngineUtilities_SessionData_%s" %\
+                                (str(self.session.key())))
         if mc_items:
             value_updated = False
             for item in mc_items:
@@ -282,14 +281,14 @@ class _AppEngineUtilities_SessionData(db.Model):
                 if item.keyname == self.keyname:
                     item.content = self.content
                     item.model = self.model
-                    memcache.set(u"_AppEngineUtilities_SessionData_%s" % \
-                        (str(self.session.key())), mc_items)
+                    memcache.set(u"_AppEngineUtilities_SessionData_%s" %\
+                                 (str(self.session.key())), mc_items)
                     value_updated = True
                     break
             if value_updated == False:
                 mc_items.append(self)
-                memcache.set(u"_AppEngineUtilities_SessionData_%s" % \
-                    (str(self.session.key())), mc_items)
+                memcache.set(u"_AppEngineUtilities_SessionData_%s" %\
+                             (str(self.session.key())), mc_items)
         return return_val
 
     def delete(self):
@@ -302,8 +301,8 @@ class _AppEngineUtilities_SessionData(db.Model):
             db.delete(self)
         except:
             self.deleted = True
-        mc_items = memcache.get(u"_AppEngineUtilities_SessionData_%s" % \
-            (str(self.session.key())))
+        mc_items = memcache.get(u"_AppEngineUtilities_SessionData_%s" %\
+                                (str(self.session.key())))
         value_handled = False
         for item in mc_items:
             if value_handled == True:
@@ -313,13 +312,12 @@ class _AppEngineUtilities_SessionData(db.Model):
                     item.deleted = True
                 else:
                     mc_items.remove(item)
-                memcache.set(u"_AppEngineUtilities_SessionData_%s" % \
-                    (str(self.session.key())), mc_items)
+                memcache.set(u"_AppEngineUtilities_SessionData_%s" %\
+                             (str(self.session.key())), mc_items)
         return True
-        
+
 
 class _DatastoreWriter(object):
-
     def put(self, keyname, value, session):
         """
         Insert a keyname/value pair into the datastore for the session.
@@ -339,13 +337,13 @@ class _DatastoreWriter(object):
         # entries.
         if session.cookie_vals.has_key(keyname):
             del(session.cookie_vals[keyname])
-            session.output_cookie["%s_data" % (session.cookie_name)] = \
-                json.dumps(session.cookie_vals)
-            session.output_cookie["%s_data" % (session.cookie_name)]["path"] = \
-                session.cookie_path
+            session.output_cookie["%s_data" % (session.cookie_name)] =\
+            simplejson.dumps(session.cookie_vals)
+            session.output_cookie["%s_data" % (session.cookie_name)]["path"] =\
+            session.cookie_path
             if session.cookie_domain:
-                session.output_cookie["%s_data" % \
-                    (session.cookie_name)]["domain"] = session.cookie_domain
+                session.output_cookie["%s_data" %\
+                                      (session.cookie_name)]["domain"] = session.cookie_domain
             print session.output_cookie.output()
 
         sessdata = session._get(keyname=keyname)
@@ -362,7 +360,7 @@ class _DatastoreWriter(object):
             sessdata.content = pickle.dumps(value)
             sessdata.model = None
         sessdata.session = session.session
-            
+
         session.cache[keyname] = value
         return sessdata.put()
 
@@ -382,21 +380,22 @@ class _CookieWriter(object):
         if value is None:
             raise ValueError(u"You must pass a value to put.")
 
-        # Use json for cookies instead of pickle.
+        # Use simplejson for cookies instead of pickle.
         session.cookie_vals[keyname] = value
         # update the requests session cache as well.
         session.cache[keyname] = value
-        # json will raise any error I'd raise about an invalid value
+        # simplejson will raise any error I'd raise about an invalid value
         # so let it raise exceptions
-        session.output_cookie["%s_data" % (session.cookie_name)] = \
-            json.dumps(session.cookie_vals)
-        session.output_cookie["%s_data" % (session.cookie_name)]["path"] = \
-            session.cookie_path
+        session.output_cookie["%s_data" % (session.cookie_name)] =\
+        simplejson.dumps(session.cookie_vals)
+        session.output_cookie["%s_data" % (session.cookie_name)]["path"] =\
+        session.cookie_path
         if session.cookie_domain:
-            session.output_cookie["%s_data" % \
-                (session.cookie_name)]["domain"] = session.cookie_domain
+            session.output_cookie["%s_data" %\
+                                  (session.cookie_name)]["domain"] = session.cookie_domain
         print session.output_cookie.output()
         return True
+
 
 class Session(object):
     """
@@ -474,17 +473,17 @@ class Session(object):
     COOKIE_NAME = settings.session["COOKIE_NAME"]
 
     def __init__(self, cookie_path=settings.session["DEFAULT_COOKIE_PATH"],
-            cookie_domain=settings.session["DEFAULT_COOKIE_DOMAIN"],
-            cookie_name=settings.session["COOKIE_NAME"],
-            session_expire_time=settings.session["SESSION_EXPIRE_TIME"],
-            clean_check_percent=settings.session["CLEAN_CHECK_PERCENT"],
-            integrate_flash=settings.session["INTEGRATE_FLASH"],
-            check_ip=settings.session["CHECK_IP"],
-            check_user_agent=settings.session["CHECK_USER_AGENT"],
-            set_cookie_expires=settings.session["SET_COOKIE_EXPIRES"],
-            session_token_ttl=settings.session["SESSION_TOKEN_TTL"],
-            last_activity_update=settings.session["UPDATE_LAST_ACTIVITY"],
-            writer=settings.session["WRITER"]):
+                 cookie_domain=settings.session["DEFAULT_COOKIE_DOMAIN"],
+                 cookie_name=settings.session["COOKIE_NAME"],
+                 session_expire_time=settings.session["SESSION_EXPIRE_TIME"],
+                 clean_check_percent=settings.session["CLEAN_CHECK_PERCENT"],
+                 integrate_flash=settings.session["INTEGRATE_FLASH"],
+                 check_ip=settings.session["CHECK_IP"],
+                 check_user_agent=settings.session["CHECK_USER_AGENT"],
+                 set_cookie_expires=settings.session["SET_COOKIE_EXPIRES"],
+                 session_token_ttl=settings.session["SESSION_TOKEN_TTL"],
+                 last_activity_update=settings.session["UPDATE_LAST_ACTIVITY"],
+                 writer=settings.session["WRITER"]):
         """
         Initializer
 
@@ -528,22 +527,21 @@ class Session(object):
         self.cookie = Cookie.SimpleCookie()
         self.output_cookie = Cookie.SimpleCookie()
         if string_cookie == "":
-          self.cookie_vals = {}
+            self.cookie_vals = {}
         else:
             self.cookie.load(string_cookie)
             try:
-                self.cookie_vals = \
-                    json.loads(self.cookie["%s_data" % (self.cookie_name)].value)
-                    # sync self.cache and self.cookie_vals which will make those
-                    # values available for all gets immediately.
+                self.cookie_vals =\
+                simplejson.loads(self.cookie["%s_data" % (self.cookie_name)].value)
+                # sync self.cache and self.cookie_vals which will make those
+                # values available for all gets immediately.
                 for k in self.cookie_vals:
                     self.cache[k] = self.cookie_vals[k]
                     # sync the input cookie with the output cookie
-                    self.output_cookie["%s_data" % (self.cookie_name)] = \
-                        json.dumps(self.cookie_vals) #self.cookie["%s_data" % (self.cookie_name)]
+                    self.output_cookie["%s_data" % (self.cookie_name)] =\
+                    simplejson.dumps(self.cookie_vals) #self.cookie["%s_data" % (self.cookie_name)]
             except Exception, e:
                 self.cookie_vals = {}
-
 
         if writer == "cookie":
             pass
@@ -594,8 +592,8 @@ class Session(object):
                     self.sid = self.session.sid[-1]
                     # check if last_activity needs updated
                     ula = datetime.timedelta(seconds=self.last_activity_update)
-                    if datetime.datetime.now() > self.session.last_activity + \
-                        ula:
+                    if datetime.datetime.now() > self.session.last_activity +\
+                                                 ula:
                         do_put = True
 
             self.output_cookie[cookie_name] = self.sid
@@ -603,8 +601,8 @@ class Session(object):
             if self.cookie_domain:
                 self.output_cookie[cookie_name]["domain"] = self.cookie_domain
             if self.set_cookie_expires:
-                self.output_cookie[cookie_name]["expires"] = \
-                    self.session_expire_time
+                self.output_cookie[cookie_name]["expires"] =\
+                self.session_expire_time
 
             self.cache[u"sid"] = self.sid
 
@@ -615,19 +613,20 @@ class Session(object):
         if self.set_cookie_expires:
             if not self.output_cookie.has_key("%s_data" % (cookie_name)):
                 self.output_cookie["%s_data" % (cookie_name)] = u""
-            self.output_cookie["%s_data" % (cookie_name)]["expires"] = \
-                self.session_expire_time
+            self.output_cookie["%s_data" % (cookie_name)]["expires"] =\
+            self.session_expire_time
         print self.output_cookie.output()
 
         # fire up a Flash object if integration is enabled
         if self.integrate_flash:
             import flash
+
             self.flash = flash.Flash(cookie=self.cookie)
 
         # randomly delete old stale sessions in the datastore (see
         # CLEAN_CHECK_PERCENT variable)
         if random.randint(1, 100) < clean_check_percent:
-            self._clean_old_sessions() 
+            self._clean_old_sessions()
 
     def new_sid(self):
         """
@@ -636,9 +635,9 @@ class Session(object):
         Returns session id as a unicode string.
         """
         sid = u"%s_%s" % (str(self.session.key()),
-            hashlib.md5(repr(time.time()) + \
-            unicode(random.random())).hexdigest()
-        )
+                          hashlib.md5(repr(time.time()) +\
+                                      unicode(random.random())).hexdigest()
+            )
         #sid = unicode(self.session.session_key) + "_" + \
         #        hashlib.md5(repr(time.time()) + \
         #        unicode(random.random())).hexdigest()
@@ -666,7 +665,7 @@ class Session(object):
                 return self.session.get_item(keyname)
             return self.session.get_items()
         return None
-    
+
     def _validate_key(self, keyname):
         """
         private method
@@ -718,13 +717,13 @@ class Session(object):
             self.session.delete()
         self.cookie_vals = {}
         self.cache = {}
-        self.output_cookie["%s_data" % (self.cookie_name)] = \
-            json.dumps(self.cookie_vals)
-        self.output_cookie["%s_data" % (self.cookie_name)]["path"] = \
-            self.cookie_path
+        self.output_cookie["%s_data" % (self.cookie_name)] =\
+        simplejson.dumps(self.cookie_vals)
+        self.output_cookie["%s_data" % (self.cookie_name)]["path"] =\
+        self.cookie_path
         if self.cookie_domain:
-            self.output_cookie["%s_data" % \
-                (self.cookie_name)]["domain"] = self.cookie_domain
+            self.output_cookie["%s_data" %\
+                               (self.cookie_name)]["domain"] = self.cookie_domain
 
         print self.output_cookie.output()
         # if the event class has been loaded, fire off the sessionDelete event
@@ -816,7 +815,7 @@ class Session(object):
         if len(self.session.sid) > 2:
             self.session.sid.remove(self.session.sid[0])
         self.session.sid.append(self.sid)
-        
+
         return self.sid
 
     def flush(self):
@@ -837,11 +836,11 @@ class Session(object):
         Returns a unicode string of headers.
         """
         return u"".join([u"Expires: Tue, 03 Jul 2001 06:00:00 GMT",
-            strftime("Last-Modified: %a, %d %b %y %H:%M:%S %Z").decode("utf-8"),
-            u"Cache-Control: no-store, no-cache, must-revalidate, max-age=0",
-            u"Cache-Control: post-check=0, pre-check=0",
-            u"Pragma: no-cache",
-        ])
+                         strftime("Last-Modified: %a, %d %b %y %H:%M:%S %Z").decode("utf-8"),
+                         u"Cache-Control: no-store, no-cache, must-revalidate, max-age=0",
+                         u"Cache-Control: post-check=0, pre-check=0",
+                         u"Pragma: no-cache",
+                         ])
 
     def clear(self):
         """
@@ -856,16 +855,16 @@ class Session(object):
         if sessiondata is not None:
             for sd in sessiondata:
                 sd.delete()
-        # delete from memcache
+                # delete from memcache
         self.cache = {}
         self.cookie_vals = {}
-        self.output_cookie["%s_data" %s (self.cookie_name)] = \
-            json.dumps(self.cookie_vals)
-        self.output_cookie["%s_data" % (self.cookie_name)]["path"] = \
-            self.cookie_path
+        self.output_cookie["%s_data" % s(self.cookie_name)] =\
+        simplejson.dumps(self.cookie_vals)
+        self.output_cookie["%s_data" % (self.cookie_name)]["path"] =\
+        self.cookie_path
         if self.cookie_domain:
-            self.output_cookie["%s_data" % \
-                (self.cookie_name)]["domain"] = self.cookie_domain
+            self.output_cookie["%s_data" %\
+                               (self.cookie_name)]["domain"] = self.cookie_domain
 
         print self.output_cookie.output()
         return True
@@ -921,7 +920,7 @@ class Session(object):
             v.append(self[k])
         return v
 
-    def get(self, keyname, default = None):
+    def get(self, keyname, default=None):
         """
         Returns either the value for the keyname or a default value
         passed.
@@ -939,7 +938,7 @@ class Session(object):
                 return default
             return None
 
-    def setdefault(self, keyname, default = None):
+    def setdefault(self, keyname, default=None):
         """
         Returns either the value for the keyname or a default value
         passed. If keyname lookup is a miss, the keyname is set with
@@ -1085,7 +1084,7 @@ class Session(object):
             keyname: The keyname of the object to delete.
         """
         bad_key = False
-        sessdata = self._get(keyname = keyname)
+        sessdata = self._get(keyname=keyname)
         if sessdata is None:
             bad_key = True
         else:
@@ -1093,13 +1092,13 @@ class Session(object):
         if keyname in self.cookie_vals:
             del self.cookie_vals[keyname]
             bad_key = False
-            self.output_cookie["%s_data" % (self.cookie_name)] = \
-                json.dumps(self.cookie_vals)
-            self.output_cookie["%s_data" % (self.cookie_name)]["path"] = \
-                self.cookie_path
+            self.output_cookie["%s_data" % (self.cookie_name)] =\
+            simplejson.dumps(self.cookie_vals)
+            self.output_cookie["%s_data" % (self.cookie_name)]["path"] =\
+            self.cookie_path
             if self.cookie_domain:
-                self.output_cookie["%s_data" % \
-                    (self.cookie_name)]["domain"] = self.cookie_domain
+                self.output_cookie["%s_data" %\
+                                   (self.cookie_name)]["domain"] = self.cookie_domain
 
             print self.output_cookie.output()
         if bad_key:
