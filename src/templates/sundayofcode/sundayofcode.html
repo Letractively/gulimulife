@@ -2,12 +2,137 @@
 
 {% block logo_name %}Sunday of Code{% endblock %}
 
+{% block more_css_include %}
+  <link type="text/css" rel="stylesheet" href="/static/sundayofcode/css/main.css"/>
+  <link type="text/css" href="/static/css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet"/>
+{% endblock %}
+
+{% block more_js_include %}
+  <script src="/static/js/jquery.js"></script>
+  <script src="/static/js/jquery-ui-1.8.16.custom.min.js"></script>
+  <script src="/static/js/bootstrap-transition.js"></script>
+  <script src="/static/js/bootstrap-alert.js"></script>
+  <script src="/static/js/bootstrap-modal.js"></script>
+  <script src="/static/js/bootstrap-dropdown.js"></script>
+  <script src="/static/js/bootstrap-tooltip.js"></script>
+  <script src="/static/js/bootstrap-popover.js"></script>
+  <script src="/static/js/bootstrap-button.js"></script>
+  <script src="/static/js/bootstrap-collapse.js"></script>
+
+  <script src="/static/sundayofcode/config.js"></script>
+  <script>
+    $('body').ready(function () {
+      $('#add_entry_panel input.edate').datepicker();
+      //debug
+      $("#add_entry_panel button.btn").click(function(){
+        var title = $('#add_entry_panel input.etitle').val();
+        var date = $('#add_entry_panel input.edate').val();
+        var tags_str = $('#add_entry_panel input.etags').val();
+        var tags = tags_str.split(',')
+        var lang_str = $('#add_entry_panel input.elang').val();
+        var lang = lang_str.split(',')
+        var post_data = {
+          'title': title,
+          'date': date,
+          'tags': tags,
+          'lang': lang
+        };
+        $.ajax({
+            type:"POST",
+            url:"/soc/update_entry",
+            data: JSON.stringify(post_data) ,
+            dataType:"json",
+            success:function(res){
+              $('#debug div.info').html("add an entry!");}
+        });
+      });
+      $("#add_tag_panel button.btn").click(function(){
+        var name = $('#add_tag_panel input.tname').val();
+        $.post("/soc/update_tag", {
+          'name': name
+        }, function(res){
+          $('#debug div.info').html("add a tag!");
+        })
+      });
+      $("#add_language_panel button.btn").click(function(){
+        var name = $('#add_language_panel input.lname').val();
+        var color = $('#add_language_panel input.lcolor').val();
+        $.post("/soc/update_language", {
+          'name': name,
+          'color': color
+        }, function(res){
+          $('#debug div.info').html("add a tag!");
+        })
+      });
+    });
+  </script>
+{% endblock %}
+
 {% block body %}
   <div class="container">
-  <div class="row">
-    <h1>Sunday of Code</h1>
-    <div class="span2">TODO</div>
-    <div class="span10">TODO</div>
+    <div id="language" class="row"></div>
+    <div id="tags" class="row"></div>
+    <div id="calendar" class="row"></div>
+  <div id="panel" class="row">
+    <div id="add_entry_panel" class="span4">
+      <h3>Add Entry</h3>
+      <label>title</label>
+      <input type="text" class="span3 etitle" name="title" placeholder="Type something…">
+      <label>date</label>
+      <input type="text" class="span3 edate" name="date" placeholder="Choose date">
+      <label>Tags</label>
+      <input type="text" class="span3 etags" name="date" placeholder="Add Tags, comma to separate">
+      <label>Languages</label>
+      <input type="text" class="span3 elang" name="date" placeholder="Add Languages, comma to separate">
+      <button type="button" class="btn">add</button>
+    </div>
+    <div id="add_tag_panel" class="span4">
+      <h3>Add Tag</h3>
+      <label>name</label>
+      <input type="text" class="span3 tname" name="name" placeholder="Type something…">
+      <button type="button" class="btn">add</button>
+    </div>
+    <div id="add_language_panel" class="span4">
+      <h3>Add Language</h3>
+      <label>name</label>
+      <input type="text" class="span3 lname" name="name" placeholder="Type something…">
+      <label>color</label>
+      <input type="text" class="span3 lcolor" name="color" placeholder="Type something…">
+      <button type="button" class="btn">add</button>
+    </div>
   </div>
+    <div id="debug" class="row">
+    <div class="info"></div>
+    <h2>Entries</h2>
+    <div class="span12">
+      {% for ii in entry_list %}
+        <div class="row">
+          <div class="span12">
+            <p>{{ ii }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+      <h2>Tags</h2>
+      <div class="span12">
+        {% for ii in tag_list %}
+          <div class="row">
+            <div class="span12">
+              <p>{{ ii }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <h2>Languages</h2>
+      <div class="span12">
+        {% for ii in language_list %}
+          <div class="row">
+            <div class="span12">
+              <p>{{ ii }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
   </div>
 {% endblock %}

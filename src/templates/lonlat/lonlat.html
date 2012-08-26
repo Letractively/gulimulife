@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block logo_name %}LotLat{% endblock %}
+
+{% block more_css_include %}
+  <link type="text/css" href="/static/lonlat/lonlat.css" rel="stylesheet"/>
+{% endblock %}
+
+{% block more_js_include %}
+  <script type="text/javascript"
+          src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBjQUIJm8Ruf9-n4FMmGUsma7OOL8-8qUw&sensor=false">
+  </script>
+  <script type="text/javascript" src="/static/js/jquery.js"></script>
+  <script src="/static/js/bootstrap-collapse.js"></script>
+  <script type="text/javascript" src="/static/lonlat/lonlat.js"></script>
+{% endblock %}
+
+{% block body_on_load %}{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="row search-bar">
+    <div class="geo-search span8">
+      <span class="input-prepend"><span class="add-on"><i class="icon-search icon-white"></i></span><input id="geocode_input" class="span4"  type="text" placeholder="e.g Hong Kong, or 123,23.0"></span>
+      <button class="btn" id="button_geosearch">Search</button>
+    </div>
+    <div class="debug span4">
+      <span class="debug-info"></span>
+    </div>
+  </div><!--search bar-->
+
+  <div class="hero-unit" id="central_map_widget">
+    <div id="central_map_canvas">
+    </div>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Address</th>
+        <th>Lat, Lng</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td id="result_address">N/A</td>
+        <td id="result_latlng">N/A</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div> <!--body-->
+{% endblock %}
+ 
+

@@ -76,7 +76,7 @@ class MainPage(webapp2.RequestHandler):
             'access_token': access_token,
             }
 
-        self.response.out.write(django_loader.render_to_string('everyday/everyday.html', template_values))
+        self.response.out.write(django_loader.render_to_string('everyday/soc.html', template_values))
 
 #OAuth authorize
 class OAuthApply(webapp2.RequestHandler):
