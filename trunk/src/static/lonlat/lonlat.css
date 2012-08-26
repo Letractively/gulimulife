@@ -1,0 +1,22 @@
+.input-prepend input {
+    padding: 4px 6px;
+    height: auto;
+}
+
+#central_map_canvas {
+    height: 480px;
+}
+
+.hero-unit {
+    background-color: white;
+}
+
+#central_map_widget {
+    padding: 8px;
+    margin-top: 20px;
+}
+
+#central_map_widget .table {
+    margin-top: 4px;
+    margin-bottom: 0;
+}

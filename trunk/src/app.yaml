@@ -28,6 +28,10 @@ handlers:
   script: gulimu_tenthousand.tenthousand.app
   login: required
 
+- url: /lonlat.*
+  script: gulimu_lonlat.lonlat.app
+  login: required
+
 - url: /index\.html
   script: gulimulife.app
   
@@ -44,8 +48,3 @@ handlers:
 libraries:
 - name: django
   version: "1.2"
-  
-
-  
-
-  
